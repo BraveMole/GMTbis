@@ -57,8 +57,6 @@ public class TextureLoader {
                rectangle.setX((rectangle.getX()+rectangle.getWidth()/2f)*Settings.metersToPixelRatio);
                rectangle.setY((rectangle.getY()+rectangle.getHeight()/2f)*Settings.metersToPixelRatio);
                rectangle.setSize(rectangle.width*Settings.metersToPixelRatio,rectangle.height*Settings.metersToPixelRatio);
-
-
             }
             else if(object instanceof TiledMapTileMapObject){
                 TiledMapTileMapObject tile = ((TiledMapTileMapObject) object);
