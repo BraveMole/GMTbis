@@ -1,14 +1,9 @@
 package panic.game;
 
-import actors.Plateform;
-import actors.Player;
 import actors.Key;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import ui.WorldInputProcessor;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import panic.game.GameClass;
-import javax.xml.soap.Text;
 
 public class World extends Stage {
     public Group actors = new Group();

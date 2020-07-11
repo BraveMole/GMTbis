@@ -1,5 +1,7 @@
 package actors;
 
+import Utilities.AnimatedSprite;
+import Utilities.Animation;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;

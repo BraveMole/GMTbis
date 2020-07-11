@@ -1,5 +1,6 @@
 package actors;
 
+import Utilities.AnimatedSprite;
 import com.badlogic.gdx.graphics.Texture;
 import panic.game.TextureLoader;
 
