@@ -21,6 +21,9 @@ public class Player extends SuperActor{
         totalcontrols.add("d");
         totalcontrols.add("a");
         totalcontrols.add("s");
+        totalcontrols.add("h");
+        totalcontrols.add("j");
+        totalcontrols.add("k");
 
         controlsleft = (ArrayList<String>) totalcontrols.clone();
 

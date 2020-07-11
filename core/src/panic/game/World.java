@@ -10,8 +10,9 @@ import com.badlogic.gdx.utils.Array;
 public class World extends Stage {
     public Array<Key> keys;
     public Group actors = new Group();
-    public int[] x = {100, 150, 50, 100};
-    public int[] y = {150, 100, 100, 100};
+
+    public int[] x = {100, 150, 50, 100, 250 ,300 ,350};
+    public int[] y = {150, 100, 100, 100,125,125,125};
     public boolean main;
 
     public World(boolean main) {

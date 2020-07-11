@@ -12,18 +12,13 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.Array;
 
 public class TextureLoader {
     public static AssetManager manager;
     public static TiledMap map;
-    public static int tileWidth, tileHeight,
-            mapWidthInTiles, mapHeightInTiles,
-            mapWidthInPixels, mapHeightInPixels;
-
     public static Texture Player;
-    public static int WIDTH = 20;
-    public static int HEIGHT = 20;
-    public static Texture[] KEYS = new Texture[13];
+    public static Texture[] KEYS = new Texture[14];
 
     public static void loadTexture() {
         loadMap();
@@ -45,7 +40,7 @@ public class TextureLoader {
         KEYS[10] = new Texture("J.png");
         KEYS[11] = new Texture("J_no.png");
         KEYS[12] = new Texture("K.png");
-        KEYS[12] = new Texture("K_no.png");
+        KEYS[13] = new Texture("K_no.png");
     }
 
     private static void loadMap() {
@@ -56,32 +51,5 @@ public class TextureLoader {
         manager.finishLoading();
         manager.finishLoading();
         map = manager.get(filename, TiledMap.class);
-        MapProperties properties = map.getProperties();
-        tileWidth         = properties.get("tilewidth", Integer.class);
-        tileHeight        = properties.get("tileheight", Integer.class);
-        mapWidthInTiles   = properties.get("width", Integer.class);
-        mapHeightInTiles  = properties.get("height", Integer.class);
-        mapWidthInPixels  = mapWidthInTiles  * tileWidth;
-        mapHeightInPixels = mapHeightInTiles * tileHeight;
-
-    }
-    public static void buildBuildingsBodies(TiledMap tiledMap, World world, String layer){
-        MapObjects objects = tiledMap.getLayers().get(layer).getObjects();
-        Rectangle rectangle = new Rectangle(0,0,0,0);
-        for (MapObject object: objects) {
-            if (object instanceof RectangleMapObject) {
-                rectangle = ((RectangleMapObject) object).getRectangle();
-                rectangle.setX((rectangle.getX()+rectangle.getWidth()/2f)*Settings.metersToPixelRatio);
-                rectangle.setY((rectangle.getY()+rectangle.getHeight()/2f)*Settings.metersToPixelRatio);
-                rectangle.setSize(rectangle.width*Settings.metersToPixelRatio,rectangle.height*Settings.metersToPixelRatio);
-            }
-            else if(object instanceof TiledMapTileMapObject){
-                TiledMapTileMapObject tile = ((TiledMapTileMapObject) object);
-                rectangle = new Rectangle(tile.getX(),tile.getY(),(float)(tile.getProperties().get("width")),(float)(tile.getProperties().get("height")));
-                rectangle.setX((rectangle.getX()+rectangle.getWidth()/2)*Settings.metersToPixelRatio);
-                rectangle.setY((rectangle.getY()+rectangle.getHeight()/2)*Settings.metersToPixelRatio);
-                rectangle.setSize(rectangle.width*Settings.metersToPixelRatio,rectangle.height*Settings.metersToPixelRatio);
-            }
-        }
     }
 }
