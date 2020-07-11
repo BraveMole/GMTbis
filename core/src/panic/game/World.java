@@ -1,5 +1,6 @@
 package panic.game;
 
+import Utilities.WorldInputProcessor;
 import actors.Key;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -10,6 +11,7 @@ import com.badlogic.gdx.utils.Array;
 public class World extends Stage {
     public Array<Key> keys;
     public Group actors = new Group();
+    public WorldInputProcessor inputProcessor;
 
     public int[] x = {100, 150, 50, 100, 250 ,300 ,350};
     public int[] y = {150, 100, 100, 100,125,125,125};
@@ -19,6 +21,7 @@ public class World extends Stage {
         this.main = main;
         if (main){
             actors.addActor(GameClass.character);
+            inputProcessor = new WorldInputProcessor(this.getViewport(), this, GameClass.character);
         }
         else {
             keys = new Array<>();
@@ -36,11 +39,8 @@ public class World extends Stage {
     @Override
     public void act() {
         super.act();
-    }
-
-    public void watchInputs(){
-        if (Gdx.input.isKeyPressed(Input.Keys.D)){
-
+        if (main) {
+            inputProcessor.act();
         }
     }
 
