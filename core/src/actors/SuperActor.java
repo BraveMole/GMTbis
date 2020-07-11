@@ -2,6 +2,7 @@ package actors;
 
 import Utilities.AnimatedSprite;
 import Utilities.Animation;
+import Utilities.Settings;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -28,7 +29,8 @@ public class SuperActor extends Actor {
     public void act(float delta) {
         super.act(delta);
         this.setPosition(this.body.getPosition().x,this.body.getPosition().y);
-        System.out.println(this.body.getPosition().y);
+        //We add friction here
+        this.body.setLinearVelocity(this.body.getLinearVelocity().x* Settings.friction,this.body.getLinearVelocity().y);
     }
 
     private boolean mustBeDrawn() {

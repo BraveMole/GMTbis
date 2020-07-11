@@ -15,14 +15,12 @@ import com.badlogic.gdx.physics.box2d.*;
 import static Utilities.BodyFactory.createBody;
 
 public class TextureLoader {
-    public static Texture BigGrass;
     public static Texture Player;
     public static AssetManager manager;
     public static TiledMap map;
     public static int tileWidth, tileHeight,
             mapWidthInTiles, mapHeightInTiles,
             mapWidthInPixels, mapHeightInPixels;
-    private static float density =1;
 
     public static void loadTexture() {
         loadMap();
@@ -56,14 +54,20 @@ public class TextureLoader {
         for (MapObject object: objects) {
             if (object instanceof RectangleMapObject) {
                rectangle = ((RectangleMapObject) object).getRectangle();
-               rectangle.setX(rectangle.getX()+rectangle.getWidth()/2);
-                rectangle.setY(rectangle.getY()+rectangle.getHeight()/2);
+               rectangle.setX((rectangle.getX()+rectangle.getWidth()/2f)*Settings.metersToPixelRatio);
+               rectangle.setY((rectangle.getY()+rectangle.getHeight()/2f)*Settings.metersToPixelRatio);
+               rectangle.setSize(rectangle.width*Settings.metersToPixelRatio,rectangle.height*Settings.metersToPixelRatio);
+
+
             }
             else if(object instanceof TiledMapTileMapObject){
                 TiledMapTileMapObject tile = ((TiledMapTileMapObject) object);
                 rectangle = new Rectangle(tile.getX(),tile.getY(),(float)(tile.getProperties().get("width")),(float)(tile.getProperties().get("height")));
+                rectangle.setX((rectangle.getX()+rectangle.getWidth()/2)*Settings.metersToPixelRatio);
+                rectangle.setY((rectangle.getY()+rectangle.getHeight()/2)*Settings.metersToPixelRatio);
+                rectangle.setSize(rectangle.width*Settings.metersToPixelRatio,rectangle.height*Settings.metersToPixelRatio);
             }
-            createBody(rectangle,"Static",0.1f,1);
+            createBody(rectangle,"Static",true);
         }
     }
 }

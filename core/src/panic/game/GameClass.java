@@ -25,7 +25,6 @@ public class GameClass extends ApplicationAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT | (Gdx.graphics.getBufferFormat().coverageSampling ? GL20.GL_COVERAGE_BUFFER_BIT_NV : 0));
         staticMainClass.act();
         staticMainClass.draw();
-
     }
 
     @Override
