@@ -2,7 +2,6 @@ package panic.game;
 
 
 import Utilities.Settings;
-import Utilities.TextureLoader;
 import Utilities.BodyFactory;
 import actors.Player;
 import com.badlogic.gdx.Gdx;
@@ -37,7 +36,6 @@ public class MainClass extends Stage {
         world = new World(new Vector2(0,-10),true);
         BodyFactory.initializeFactory(world);
         String layerName = "StillLayer";
-        TextureLoader.buildBuildingsBodies(TextureLoader.map,world,layerName);
         player = new Player(10,4);
         this.addActor(player);
     }
