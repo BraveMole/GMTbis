@@ -20,14 +20,13 @@ public class TextureLoader {
             mapWidthInTiles, mapHeightInTiles,
             mapWidthInPixels, mapHeightInPixels;
 
-    public static Texture BigGrass;
     public static Texture Player;
     public static int WIDTH = 20;
     public static int HEIGHT = 20;
     public static Texture[] KEYS = new Texture[13];
 
     public static void loadTexture() {
-        loadTextureEnvironment();
+        loadMap();
         loadTextureActors();
     }
 
@@ -47,11 +46,6 @@ public class TextureLoader {
         KEYS[11] = new Texture("J_no.png");
         KEYS[12] = new Texture("K.png");
         KEYS[12] = new Texture("K_no.png");
-    }
-
-
-    private static void loadTextureEnvironment() {
-        BigGrass = new Texture("BIG_grass.png");
     }
 
     private static void loadMap() {
