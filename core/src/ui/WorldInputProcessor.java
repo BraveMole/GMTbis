@@ -8,9 +8,10 @@ import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import panic.game.World;
+import actors.Player;
 
 public class WorldInputProcessor implements InputProcessor {
-
+    public Player player;
     public static float worldZoom;
     private boolean rightButtonHold = false;
     private Vector3 originMoveCam;
@@ -28,11 +29,12 @@ public class WorldInputProcessor implements InputProcessor {
     private float timeToCameraZoomTarget = 0;
 
 
-    public WorldInputProcessor(Viewport viewport, World stage) {
+    public WorldInputProcessor(Viewport viewport, World stage, Player p) {
         this.worldStage = stage;
         Gdx.input.setInputProcessor(this);
         this.viewport = viewport;
         this.originMoveCam = new Vector3();
+        this.player = p;
     }
 
 
@@ -43,11 +45,35 @@ public class WorldInputProcessor implements InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
+        if ((keycode == Input.Keys.D) || (keycode == Input.Keys.RIGHT)){
+            player.walkies = 1;
+            return true;
+        }
+        if ((keycode == Input.Keys.A) || (keycode == Input.Keys.LEFT)){
+            player.walkies = -1;
+            return true;
+        }
+        if ((keycode == Input.Keys.W) || (keycode == Input.Keys.UP)){
+            player.uppies = 1;
+            return true;
+        }
         return false;
     }
 
     @Override
     public boolean keyUp(int keycode) {
+        if ((keycode == Input.Keys.D) || (keycode == Input.Keys.RIGHT)){
+            player.walkies = 0;
+            return true;
+        }
+        if ((keycode == Input.Keys.A) || (keycode == Input.Keys.LEFT)){
+            player.walkies = 0;
+            return true;
+        }
+        if ((keycode == Input.Keys.W) || (keycode == Input.Keys.UP)){
+            player.uppies = 0;
+            return true;
+        }
         return false;
     }
 
