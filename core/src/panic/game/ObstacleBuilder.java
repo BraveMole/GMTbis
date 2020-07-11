@@ -13,7 +13,7 @@ public class ObstacleBuilder {
     public static Array<Rectangle> Bounds;
 
 
-    public static void buildBuildingsBodies(TiledMap tiledMap, World world, String layer){
+    public static void buildBuildingsBodies(TiledMap tiledMap, String layer){
         Bounds = new Array<>();
         MapObjects objects = tiledMap.getLayers().get(layer).getObjects();
         Rectangle rectangle = new Rectangle(0,0,0,0);
