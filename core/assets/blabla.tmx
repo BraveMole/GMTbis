@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="200" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="6">
+ <tileset firstgid="1" source="BIG_grass.tsx"/>
+ <layer id="1" name="Calque de Tuiles 1" width="200" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt1rsOwjAMBVAXCqXl8f+fW0tkYHLGovQc6S7xksGWHQEAAAAAAMA/mTKXzDUzZ26Ze/G+HPNNOMQjs2a2qGfi1anDyKre/7Ta7yw94zsz71aHkVW9by44o9695J7izHp7wd4AAAAAAAAAAAAAAACAse1EvwJ2
+  </data>
+ </layer>
+ <objectgroup id="2" name="Ground">
+  <object id="1" x="1537.33" y="274.667" width="416" height="36"/>
+  <object id="2" x="1504" y="405.333" width="225.333" height="41.3333"/>
+  <object id="3" x="1760" y="405.333" width="224" height="40"/>
+  <object id="4" x="1889.33" y="306.667" width="222.667" height="44"/>
+  <object id="5" x="1600" y="344" width="445.333" height="38.6667"/>
+ </objectgroup>
+</map>

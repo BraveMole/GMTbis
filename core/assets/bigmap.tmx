@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="200" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="12">
+ <tileset firstgid="1" source="BIG_grass.tsx"/>
+ <layer id="1" name="Calque de Tuiles 1" width="200" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt1kkOgkAQQFFwxIn7H9dasCCtaHcHEsT3kr9gAQFSFWgaAAAAAAAAAAAAAHjVDu2ifXSIjtEpOg/B1n3bgan65Bi2oGQf+oLsCr+k5ruQznyqiy7RNbpF9+jx5rx/3ZU2I+ZX+w+UuwdT+/BJza6MS58hZ7ZKG7+zJa6f1mXE/HJnMbc13GO6rzmzVVLN7M7R1DuAknkZt8RcmV0AAAAAAAAAWK8n6OkJVg==
+  </data>
+ </layer>
+ <objectgroup id="2" name="Ground">
+  <object id="1" x="3969.7" y="503.03" width="157.576" height="75.7576"/>
+  <object id="2" x="4127.27" y="533.333" width="90.9091" height="84.8485"/>
+  <object id="3" x="4212.12" y="563.636" width="966.667" height="42.4242"/>
+  <object id="4" x="3684.85" y="466.667" width="342.424" height="36.3636"/>
+  <object id="5" x="3457.58" y="460.606" width="221.212" height="81.8182"/>
+  <object id="6" x="3327.27" y="500" width="221.212" height="66.6667"/>
+  <object id="7" x="3130.3" y="530.303" width="218.182" height="69.697"/>
+  <object id="8" x="2727.27" y="563.636" width="418.182" height="42.4242"/>
+  <object id="9" x="5184.85" y="563.636" width="1154.55" height="42.4242"/>
+  <object id="10" x="5190.91" y="606.061" width="345.455" height="30.303"/>
+  <object id="11" x="6118.18" y="527.273" width="287.879" height="42.4242"/>
+ </objectgroup>
+</map>

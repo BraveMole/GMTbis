@@ -1,18 +1,9 @@
 package panic.game;
 
-import actors.Settings;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.MapObjects;
-import com.badlogic.gdx.maps.MapProperties;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.utils.Array;
 
 public class TextureLoader {
     public static AssetManager manager;
@@ -44,7 +35,7 @@ public class TextureLoader {
     }
 
     private static void loadMap() {
-        String filename ="testLevel2.tmx";
+        String filename ="bigmap.tmx";
         manager = new AssetManager();
         manager.setLoader(TiledMap.class, new TmxMapLoader());
         manager.load(filename, TiledMap.class);

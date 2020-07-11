@@ -48,6 +48,7 @@ public class World extends Stage {
 
     @Override
     public void draw() {
+        this.getViewport().getCamera().position.set(GameClass.character.getX(),GameClass.character.getY(),0);
         super.draw();
     }
 

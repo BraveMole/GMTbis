@@ -24,10 +24,9 @@ public class GameClass extends ApplicationAdapter {
     public void create() {
         TextureLoader.loadTexture();
         ObstacleBuilder.buildBuildingsBodies(TextureLoader.map, Settings.layerName);
-        character = new Player(100,100);
+        character = new Player(ObstacleBuilder.middleOfMap().x,ObstacleBuilder.middleOfMap().y+50);
         mainWorld = new World(true);
         secondWorld = new World(false);
-        camera = (OrthographicCamera)(mainWorld.getCamera());
         renderer = new OrthogonalTiledMapRenderer(TextureLoader.map);
         debugrender = new ShapeRenderer();
     }
@@ -37,7 +36,7 @@ public class GameClass extends ApplicationAdapter {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT | (Gdx.graphics.getBufferFormat().coverageSampling ? GL20.GL_COVERAGE_BUFFER_BIT_NV : 0));
 
-        renderer.setView(camera);
+        renderer.setView((OrthographicCamera)mainWorld.getViewport().getCamera());
         renderer.render();
 
         mainWorld.act();
