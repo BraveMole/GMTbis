@@ -1,6 +1,7 @@
 package panic.game;
 
 import actors.Settings;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.maps.MapObject;
@@ -23,7 +24,7 @@ public class TextureLoader {
     public static Texture Player;
     public static int WIDTH = 20;
     public static int HEIGHT = 20;
-    public static Texture[] KEYS = new Texture[8];
+    public static Texture[] KEYS = new Texture[13];
 
     public static void loadTexture() {
         loadTextureEnvironment();
@@ -40,6 +41,12 @@ public class TextureLoader {
         KEYS[5] = new Texture("A_no.png");
         KEYS[6] = new Texture("S.png");
         KEYS[7] = new Texture("S_no.png");
+        KEYS[8] = new Texture("H.png");
+        KEYS[9] = new Texture("H_no.png");
+        KEYS[10] = new Texture("J.png");
+        KEYS[11] = new Texture("J_no.png");
+        KEYS[12] = new Texture("K.png");
+        KEYS[12] = new Texture("K_no.png");
     }
 
 

@@ -16,7 +16,7 @@ public class Key extends SuperActor {
         textures[1] = textoff;
 
         t = texton;
-        this.sprite = new AnimatedSprite(t, x, y, 0, t.getWidth(), t.getHeight());
+        this.sprite = new AnimatedSprite(t, x, y, 0, t.getWidth()/3, t.getHeight()/3);
         this.setRotation(90);
         name = s;
     }
