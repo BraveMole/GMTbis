@@ -1,4 +1,4 @@
-package actors;
+package Utilities;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
