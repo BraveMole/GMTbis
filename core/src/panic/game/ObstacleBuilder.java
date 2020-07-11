@@ -38,14 +38,14 @@ public class ObstacleBuilder {
             if (bound.x < minx) {
                 minx = bound.x;
             } else if (bound.x + bound.width > maxx) {
-                maxx = bound.x;
+                maxx = bound.x+bound.width;
             }
             if (bound.y < miny) {
                 miny = bound.y;
-            } else if (bound.y + bound.width > maxy) {
-                maxy = bound.y;
+            } else if (bound.y + bound.height > maxy) {
+                maxy = bound.y+bound.height;
             }
         }
-        return new Vector2((minx+maxx)/2,(miny+maxy)/2);
+        return new Vector2((minx+maxx)/2,maxy);
     }
 }

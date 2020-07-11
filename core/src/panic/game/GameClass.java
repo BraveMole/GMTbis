@@ -10,25 +10,27 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import actors.Player;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 
 public class GameClass extends ApplicationAdapter {
     public static World mainWorld;
-    public static World secondWorld;
+    public static HUD hud;
     public static Player character;
     public static ShapeRenderer debugrender;
-    public static boolean debug = true;
+    public static boolean debug = false;
     private OrthogonalTiledMapRenderer renderer;
-    private OrthographicCamera camera;
 
     @Override
     public void create() {
         TextureLoader.loadTexture();
         ObstacleBuilder.buildBuildingsBodies(TextureLoader.map, Settings.layerName);
-        character = new Player(ObstacleBuilder.middleOfMap().x,ObstacleBuilder.middleOfMap().y+50);
-        mainWorld = new World(true);
-        secondWorld = new World(false);
+        character = new Player(ObstacleBuilder.middleOfMap().x,ObstacleBuilder.middleOfMap().y+100);
+        mainWorld = new World();
+        hud = new HUD((SpriteBatch)mainWorld.getBatch());
         renderer = new OrthogonalTiledMapRenderer(TextureLoader.map);
         debugrender = new ShapeRenderer();
+
+
     }
 
     @Override
@@ -42,8 +44,7 @@ public class GameClass extends ApplicationAdapter {
         mainWorld.act();
         mainWorld.draw();
 
-        secondWorld.act();
-        secondWorld.draw();
+
         if (debug) {
             debugrender.setProjectionMatrix(mainWorld.getViewport().getCamera().combined);
             debugrender.begin(ShapeRenderer.ShapeType.Line);
