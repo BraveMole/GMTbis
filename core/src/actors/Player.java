@@ -10,15 +10,18 @@ public class Player extends SuperActor{
     double xvel = 0f;
     double yvel = 0f;
 
-    static ArrayList<String> controlsleft = new ArrayList<String>();
+    public static ArrayList<String> totalcontrols = new ArrayList<String>();
+    public static ArrayList<String> controlsleft = new ArrayList<String>();
     public int walkies;
     public int uppies;
 
     public Player(float x, float y){
-        controlsleft.add("w");
-        controlsleft.add("a");
-        controlsleft.add("s");
-        controlsleft.add("d");
+        totalcontrols.add("w");
+        totalcontrols.add("a");
+        totalcontrols.add("s");
+        totalcontrols.add("d");
+
+        controlsleft = (ArrayList<String>) totalcontrols.clone();
 
         Texture text = TextureLoader.Player;
         this.sprite = new AnimatedSprite(text, x, y, -90, text.getWidth(), text.getHeight());
@@ -29,9 +32,9 @@ public class Player extends SuperActor{
 
     @Override
     public void act(float delta) {
-        System.out.println(this.getX());
-        System.out.println(this.getY());
-        System.out.println(xvel);
+//        System.out.println(this.getX());
+//        System.out.println(this.getY());
+//        System.out.println(xvel);
         if ((controlsleft.contains("d") && (walkies == 1)) || (controlsleft.contains("a") && (walkies == -1))) {
             xvel += walkies * speed;
         }

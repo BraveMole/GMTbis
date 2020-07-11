@@ -7,10 +7,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class TextureLoader {
     public static Texture BigGrass;
     public static Texture Player;
-    public static Texture[] W = new Texture[2];
-    public static Texture[] A = new Texture[2];
-    public static Texture[] S = new Texture[2];
-    public static Texture[] D = new Texture[2];
+    public static int WIDTH = 20;
+    public static int HEIGHT = 20;
+    public static Texture[] KEYS = new Texture[8];
 
     public static void loadTexture() {
         loadTextureEnvironment();
@@ -19,14 +18,14 @@ public class TextureLoader {
 
     private static void loadTextureActors(){
         Player = new Texture("Triston.png");
-        W[0] = new Texture("W.png");
-        W[1] = new Texture("W_no.png");
-        A[0] = new Texture("A.png");
-        A[1] = new Texture("A_no.png");
-        S[0] = new Texture("S.png");
-        S[1] = new Texture("S_no.png");
-        D[0] = new Texture("D.png");
-        D[1] = new Texture("D_no.png");
+        KEYS[0] = new Texture("W.png");
+        KEYS[1] = new Texture("W_no.png");
+        KEYS[2] = new Texture("A.png");
+        KEYS[3] = new Texture("A_no.png");
+        KEYS[4] = new Texture("S.png");
+        KEYS[5] = new Texture("S_no.png");
+        KEYS[6] = new Texture("D.png");
+        KEYS[7] = new Texture("D_no.png");
     }
 
 
