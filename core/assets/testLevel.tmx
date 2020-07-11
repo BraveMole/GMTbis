@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="4">
+ <tileset firstgid="1" source="D:/GMT/core/assets/BIG_grass.tsx"/>
+ <layer id="1" name="Layer1" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt2EkOwjAQBMCw7/z/uQwfQEBM3CFVUt8dpT2yZhgAAAAAAPg3q8q6sqlsK7vKvnLoeagFO1ZOlXPlUrlWbpV7z0MNbXuic+O17Elq5wAAAID32bdksW/RyTQ6yRyZI1nMEQCAaXkPZ+n9HtaHLL37QA53M4u7CQAAALT0ye6n154oaT/167N8svtpsSf65nuS9lNJZxnr+S/+6Xvm7jj4HwAAAMxH0v4MO4WlcO+yuHcwPXMwizkItGC2ZzHbAQCWwTs8i3f4OPqcRZ+/96rL+jy9V13WZ8jjPZDFewAAAIBeHhF+CXI=
+  </data>
+ </layer>
+ <objectgroup id="2" name="ObjectLayer1">
+  <object id="3" x="608" y="1010" width="224" height="46"/>
+ </objectgroup>
+</map>
