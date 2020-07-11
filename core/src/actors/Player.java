@@ -11,4 +11,9 @@ public class Player extends SuperActor{
         this.setY(y);
         this.setRotation(90);
     }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+    }
 }
