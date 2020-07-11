@@ -1,5 +1,6 @@
 package panic.game;
 
+import actors.Settings;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -19,7 +20,7 @@ public class GameClass extends ApplicationAdapter {
     @Override
     public void create() {
         TextureLoader.loadTexture();
-       // ObstacleBuilder.buildBuildingsBodies();
+      //  ObstacleBuilder.buildBuildingsBodies(TextureLoader.map, Settings.);
         character = new Player(100,100);
         mainWorld = new World(true);
         secondWorld = new World(false);
