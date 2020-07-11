@@ -20,15 +20,11 @@ public class ObstacleBuilder {
         for (MapObject object: objects) {
             if (object instanceof RectangleMapObject) {
                 rectangle = ((RectangleMapObject) object).getRectangle();
-                rectangle.setX(rectangle.getX()+rectangle.getWidth()/2f);
-                rectangle.setY(rectangle.getY()+rectangle.getHeight()/2f);
                 Bounds.add(rectangle);
             }
             else if(object instanceof TiledMapTileMapObject){
                 TiledMapTileMapObject tile = ((TiledMapTileMapObject) object);
                 rectangle = new Rectangle(tile.getX(),tile.getY(),(float)(tile.getProperties().get("width")),(float)(tile.getProperties().get("height")));
-                rectangle.setX(rectangle.getX()+rectangle.getWidth()/2f);
-                rectangle.setY(rectangle.getY()+rectangle.getHeight()/2f);
                 Bounds.add(rectangle);
             }
         }
