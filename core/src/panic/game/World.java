@@ -7,26 +7,29 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import ui.WorldInputProcessor;
 import com.badlogic.gdx.scenes.scene2d.Group;
-
+import panic.game.GameClass;
 import javax.xml.soap.Text;
 
 public class World extends Stage {
-    public Player p = new Player(0, 0);
-    public Group keys = new Group();
-    public static World mainWorld;
-    public WorldInputProcessor inputProcessor = new WorldInputProcessor(this.getViewport(), this, p);
-    public int[] x = {200, 100, 200, 300};
+    public Group actors = new Group();
+    public WorldInputProcessor inputProcessor;
+    public int[] x = {200, 300, 100, 200};
     public int[] y = {200, 100, 100, 100};
+    public boolean main;
 
-    public World() {
-        mainWorld = this;
-        for (int z = 0; z < p.totalcontrols.size(); z++){
-            Key k = new Key(x[z], y[z], TextureLoader.KEYS[2 * z], TextureLoader.KEYS[2 * z + 1], p.totalcontrols.get(z));
-            keys.addActor(k);
+    public World(boolean main) {
+        this.main = main;
+        if (main){
+            actors.addActor(GameClass.character);
+            inputProcessor = new WorldInputProcessor(this.getViewport(), this, GameClass.character);
         }
-
-        super.addActor(keys);
-        super.addActor(p);
+        else {
+            for (int z = 0; z < GameClass.character.totalcontrols.size(); z++) {
+                Key k = new Key(x[z], y[z], TextureLoader.KEYS[2 * z], TextureLoader.KEYS[2 * z + 1], GameClass.character.totalcontrols.get(z));
+                actors.addActor(k);
+            }
+        }
+        super.addActor(actors);
         this.getViewport().getCamera().viewportHeight = this.getViewport().getScreenHeight();
         this.getViewport().getCamera().viewportWidth = this.getViewport().getScreenWidth();
     }
@@ -34,7 +37,9 @@ public class World extends Stage {
     @Override
     public void act() {
         super.act();
-        this.inputProcessor.act();
+        if (main) {
+            this.inputProcessor.act();
+        }
     }
 
     @Override

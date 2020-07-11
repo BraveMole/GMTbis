@@ -17,9 +17,9 @@ public class Player extends SuperActor{
 
     public Player(float x, float y){
         totalcontrols.add("w");
+        totalcontrols.add("d");
         totalcontrols.add("a");
         totalcontrols.add("s");
-        totalcontrols.add("d");
 
         controlsleft = (ArrayList<String>) totalcontrols.clone();
 

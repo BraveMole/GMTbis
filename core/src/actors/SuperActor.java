@@ -3,7 +3,7 @@ package actors;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import static panic.game.World.mainWorld;
+import static panic.game.GameClass.mainWorld;
 
 public class SuperActor extends Actor {
     public AnimatedSprite sprite;
