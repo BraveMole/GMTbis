@@ -19,6 +19,7 @@ public class GameClass extends ApplicationAdapter {
     @Override
     public void create() {
         TextureLoader.loadTexture();
+       // ObstacleBuilder.buildBuildingsBodies();
         character = new Player(100,100);
         mainWorld = new World(true);
         secondWorld = new World(false);
