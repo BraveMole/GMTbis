@@ -1,6 +1,6 @@
 package panic.game;
 
-import actors.Settings;
+import Utilities.Settings;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.assets.AssetManager;
