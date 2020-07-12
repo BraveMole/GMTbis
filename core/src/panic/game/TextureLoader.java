@@ -26,10 +26,20 @@ public class TextureLoader {
     public static TextureRegion[] characterRunningBis;
     public static TextureRegion[] characterStopped;
     public static TextureRegion[] characterStoppedBis;
+    public static Texture menu;
+    public static Texture play;
+    public static Texture end;
 
     public static void loadTexture() {
+        loadMenu();
         loadMap();
         loadTextureActors();
+    }
+
+    private static void loadMenu(){
+        menu = new Texture("menu.png");
+        play = new Texture("play.png");
+        end = new Texture("end.png");
     }
 
     private static void loadTextureActors(){

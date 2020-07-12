@@ -10,7 +10,7 @@ import panic.game.GameClass;
 import panic.game.TextureLoader;
 
 public class Portal extends SuperActor {
-    private Polygon collisionPolygon;
+    private Rectangle collisionRectangle;
 
     public Portal(float x, float y) {
         Texture text = TextureLoader.Portal;
@@ -20,19 +20,19 @@ public class Portal extends SuperActor {
         this.setX(x);
         this.setY(y);
         this.setRotation(90);
-        collisionPolygon = new Polygon(new float[]{0,0,width,0,width,height,0,height});
+        collisionRectangle = new Rectangle(x-width/4,y-height/4,width/2,height/2);
     }
 
-    public Polygon getCollisionPolygon() {
-        return collisionPolygon;
+    public Rectangle getCollisionRectangle() {
+        return collisionRectangle;
     }
 
     @Override
     public void act(float delta) {
         Player p = GameClass.character;
-        if (Intersector.overlaps(this.getCollisionPolygon().getBoundingRectangle(), p.getCollisionRectangle())) {
-            if (p.open){
-                // TODO Fix
+        if (Intersector.overlaps(this.collisionRectangle, p.getCollisionRectangle())) {
+            if (p.isOpen()){
+                GameClass.endGame=true;
             }
         }
 

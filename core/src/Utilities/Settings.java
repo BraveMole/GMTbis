@@ -9,7 +9,7 @@ public class Settings {
     public static float dashSpeed = 200;
     public static float playerSize = 0.5f;
     public static float enemySize = 0.5f;
-    public static float projectileSize = 0.5f;
+    public static float projectileSize = 0.2f;
     public static float jumpheight = 50;
     public static float timeBetweenTwoApparition = 0.5f;
     public static float timeBetweenTwoAugmentation = 5f;

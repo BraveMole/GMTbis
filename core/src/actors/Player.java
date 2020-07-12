@@ -1,17 +1,13 @@
 package actors;
 
-import Utilities.AnimatedSprite;
 import Utilities.Animation;
 import Utilities.Settings;
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector3;
 import panic.game.GameClass;
 import panic.game.ObstacleBuilder;
 
-import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
 import com.badlogic.gdx.math.Rectangle;
 
@@ -93,6 +89,10 @@ public class Player extends SuperActor{
         }
     }
 
+    public boolean isOpen(){
+        return controlsleft.contains("k");
+    }
+
     public void  killedEnemy(){
         numberOfEnemyKilled++;
         if (numberOfEnemyKilled > Settings.numberOfEnemiesToKill) {
@@ -157,6 +157,8 @@ public class Player extends SuperActor{
                 else {
                     GameClass.sm.takedamage.play();
                     invis = invisframes;
+                    GameClass.mainWorld.actors.removeActor(e);
+                    GameClass.enemies.removeValue(e,false);
                     controlsleft.remove(controlsleft.size() - 1);
                 }
             }
