@@ -1,6 +1,7 @@
 package panic.game;
 
 import Utilities.Settings;
+import Utilities.SoundMaker;
 import actors.Enemy;
 import actors.Projectile;
 import com.badlogic.gdx.ApplicationAdapter;
@@ -20,9 +21,8 @@ public class GameClass extends ApplicationAdapter {
     public static Array<Projectile> liveProjectiles;
     public static ShapeRenderer debugrender;
     public static Array<Enemy> enemies;
-    public static boolean debug = true;
-    public static SoundMaker sm;
     public static boolean debug = false;
+    public static SoundMaker sm;
     private OrthogonalTiledMapRenderer renderer;
 
     @Override
@@ -37,14 +37,7 @@ public class GameClass extends ApplicationAdapter {
         debugrender = new ShapeRenderer();
         enemies = new Array<>();
         liveProjectiles = new Array<>();
-    }
-
-    public void addLiveProjectile(Projectile projectile){
-        liveProjectiles.add(projectile);
-    }
-
-    public void removeLiveProjectile(Projectile projectile){
-        liveProjectiles.removeValue(projectile,false);
+        sm = new SoundMaker();
     }
 
     @Override
@@ -54,11 +47,8 @@ public class GameClass extends ApplicationAdapter {
         background.render();
         renderer.setView((OrthographicCamera)mainWorld.getViewport().getCamera());
         renderer.render();
-
-
         mainWorld.act();
         mainWorld.draw();
-
         if (debug) {
             debugrender.setProjectionMatrix(mainWorld.getViewport().getCamera().combined);
             debugrender.begin(ShapeRenderer.ShapeType.Line);

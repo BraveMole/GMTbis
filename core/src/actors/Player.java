@@ -77,17 +77,8 @@ public class Player extends SuperActor{
     }
 
     public void fire(Vector3 fireDirection){
-        GameClass.sm.shoot.play();
-        float xdiff = fireDirection.x - this.getX();
-        float ydiff = fireDirection.y - this.getY();
-        float angle = (float) Math.atan(ydiff/xdiff);
-        if (xdiff < 0){
-            angle += PI;
-        }
-        Projectile projectile = new Projectile(this.getX(), this.getY(), angle);
-        GameClass.mainWorld.addActor(projectile);
-        GameClass.liveProjectiles.add(projectile);
         if (GameClass.liveProjectiles.size <Settings.maxProjectiles) {
+            GameClass.sm.shoot.play();
             float xdiff = fireDirection.x - this.getX();
             float ydiff = fireDirection.y - this.getY();
             float angle = (float) Math.atan(ydiff / xdiff);
@@ -110,7 +101,7 @@ public class Player extends SuperActor{
             GameClass.mainWorld.actors.removeActor(p);
         }
         while (GameClass.enemies.size > 0){
-            GameClass.enemies.get(0).die(false);
+            GameClass.enemies.get(0).setDead();
         }
     }
 
@@ -136,7 +127,7 @@ public class Player extends SuperActor{
         for (Enemy e : GameClass.enemies){
             if (Intersector.overlaps(e.getCollisionPolygon().getBoundingRectangle(),this.getCollisionRectangle()) && (invis == 0)) {
                 if (groundpound){
-                    e.die(true);
+                    e.setDead();
                 }
                 else {
                     GameClass.sm.takedamage.play();
@@ -154,7 +145,6 @@ public class Player extends SuperActor{
         if (controlsleft.contains("j") && usedash && dash){
             if (invis == 0) {
                 GameClass.sm.dash.play();
-//                System.out.println("Dash used");
                 dash = false;
                 invis = dashinvis;
                 if (right) {

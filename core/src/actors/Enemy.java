@@ -2,6 +2,7 @@ package actors;
 
 import Utilities.Animation;
 import Utilities.Settings;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 import panic.game.GameClass;
@@ -23,7 +24,11 @@ public class Enemy extends SuperActor {
         this.setX(x);
         this.setY(y);
         this.setRotation(90);
-        collisionPolygon = new Polygon(new float[]{0,0,width,0,width,height,0,height});
+        collisionPolygon = new Polygon(new float[]{0, 0, width, 0, width, height, 0, height});
+    }
+
+    public void setDead() {
+        this.dead = true;
     }
 
     public Polygon getCollisionPolygon() {
@@ -46,21 +51,19 @@ public class Enemy extends SuperActor {
                 if (Intersector.overlapConvexPolygons(liveProjectile.getCollisionPolygon(), this.getCollisionPolygon())) {
                     dead = true;
                     timeToDie = 0;
-                    GameClass.enemies.removeValue(this,false);
+                    GameClass.sm.enemykilled.play();
+                    GameClass.enemies.removeValue(this, false);
                     if (isFlip) {
                         this.setSprite(Animation.ENEMY_DYING);
                     } else {
                         this.setSprite(Animation.ENEMY_DYING_BIS);
                     }
                 }
-        this.setX(this.getX() + (xdiff * Settings.enemySpeed / hypotenuse));
-        this.setY(this.getY() + (ydiff * Settings.enemySpeed / hypotenuse));
-        collisionPolygon.setPosition(this.getX()-width/2,this.getY()-height/2);
-        Polygon placeHodler = new Polygon();
-        for (Projectile liveProjectile : GameClass.liveProjectiles) {
-            if(Intersector.overlapConvexPolygons(liveProjectile.getCollisionPolygon(), this.getCollisionPolygon())) {
-                this.die(true);
             }
+            this.setX(this.getX() + (xdiff * Settings.enemySpeed / hypotenuse));
+            this.setY(this.getY() + (ydiff * Settings.enemySpeed / hypotenuse));
+            collisionPolygon.setPosition(this.getX() - width / 2, this.getY() - height / 2);
+
             if (firstFlip) {
                 if (goesToRight) {
                     isFlip = true;
@@ -77,22 +80,11 @@ public class Enemy extends SuperActor {
                 isFlip = true;
             }
             super.act(delta);
-        }
-        else{
+        } else {
             timeToDie += Gdx.graphics.getDeltaTime();
-            if (timeToDie>Animation.ENEMY_DYING.getAnimationDuration()-0.05f){
+            if (timeToDie > Animation.ENEMY_DYING.getAnimationDuration() - 0.05f) {
                 GameClass.mainWorld.actors.removeActor(this);
             }
         }
-
-    }
-
-    public void die(boolean killed){
-        if (killed) {
-            GameClass.sm.enemykilled.play();
-        }
-
-        GameClass.enemies.removeValue(this,false);
-        GameClass.mainWorld.actors.removeActor(this);
     }
 }

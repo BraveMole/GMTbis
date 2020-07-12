@@ -4,19 +4,21 @@ import Utilities.Settings;
 import com.badlogic.gdx.Gdx;
 import panic.game.GameClass;
 
+import java.util.Set;
+
 public class EnemyGenerator {
-    int maxenemies;
     float xdiff;
     float ydiff;
+    int maxenemies;
     float timeSinceLastAugmentationOfEnemies;
     float timeSinceLastApparition;
 
     public EnemyGenerator( float xdiff, float ydiff){
-        maxenemies = 20;
         this.xdiff = xdiff;
         this.ydiff = ydiff;
         timeSinceLastAugmentationOfEnemies = 0;
         timeSinceLastApparition=0;
+        maxenemies = Settings.maxEnemies;
     }
 
     public void act(){
