@@ -10,11 +10,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
 public class ObstacleBuilder {
-    public static Array<Rectangle> Bounds;
-
+    public static Array<Rectangle> Bounds = new Array<>();
 
     public static void buildBuildingsBodies(TiledMap tiledMap, String layer) {
-        Bounds = new Array<>();
         MapObjects objects = tiledMap.getLayers().get(layer).getObjects();
         Rectangle rectangle;
         for (MapObject object : objects) {
