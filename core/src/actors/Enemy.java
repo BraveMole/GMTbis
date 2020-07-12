@@ -18,17 +18,15 @@ public class Enemy extends SuperActor {
     private float timeToDie;
 
     public Enemy(float x, float y) {
-        this.setSprite(Animation.ENEMY_FLYING);
+        dead = false;
+        firstFlip=true;
+        this.setSprite(Animation.ENEMY_FLYING_BIS);
         width = Animation.ENEMY_FLYING.getWidth();
         height = Animation.ENEMY_FLYING.getHeight();
         this.setX(x);
         this.setY(y);
         this.setRotation(90);
-        collisionPolygon = new Polygon(new float[]{0, 0, width, 0, width, height, 0, height});
-    }
-
-    public void setDead() {
-        this.dead = true;
+        collisionPolygon = new Polygon(new float[]{0,0,width,0,width,height,0,height});
     }
 
     public Polygon getCollisionPolygon() {
@@ -49,10 +47,10 @@ public class Enemy extends SuperActor {
             collisionPolygon.setPosition(this.getX() - width / 2, this.getY() - height / 2);
             for (Projectile liveProjectile : GameClass.liveProjectiles) {
                 if (Intersector.overlapConvexPolygons(liveProjectile.getCollisionPolygon(), this.getCollisionPolygon())) {
+                    GameClass.sm.enemykilled.play();
                     dead = true;
                     timeToDie = 0;
-                    GameClass.sm.enemykilled.play();
-                    GameClass.enemies.removeValue(this, false);
+                    GameClass.enemies.removeValue(this,false);
                     if (isFlip) {
                         this.setSprite(Animation.ENEMY_DYING);
                     } else {
@@ -60,10 +58,6 @@ public class Enemy extends SuperActor {
                     }
                 }
             }
-            this.setX(this.getX() + (xdiff * Settings.enemySpeed / hypotenuse));
-            this.setY(this.getY() + (ydiff * Settings.enemySpeed / hypotenuse));
-            collisionPolygon.setPosition(this.getX() - width / 2, this.getY() - height / 2);
-
             if (firstFlip) {
                 if (goesToRight) {
                     isFlip = true;
@@ -80,11 +74,17 @@ public class Enemy extends SuperActor {
                 isFlip = true;
             }
             super.act(delta);
-        } else {
-            timeToDie += Gdx.graphics.getDeltaTime();
-            if (timeToDie > Animation.ENEMY_DYING.getAnimationDuration() - 0.05f) {
-                GameClass.mainWorld.actors.removeActor(this);
-            }
+        }
+        else{
+            die(true);
+        }
+
+    }
+
+    public void die(boolean killed){
+        timeToDie += Gdx.graphics.getDeltaTime();
+        if (timeToDie>Animation.ENEMY_DYING.getAnimationDuration()-0.05f){
+            GameClass.mainWorld.actors.removeActor(this);
         }
     }
 }

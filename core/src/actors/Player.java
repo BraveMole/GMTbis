@@ -3,9 +3,9 @@ package actors;
 import Utilities.AnimatedSprite;
 import Utilities.Animation;
 import Utilities.Settings;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector3;
 import panic.game.GameClass;
@@ -101,7 +101,8 @@ public class Player extends SuperActor{
             GameClass.mainWorld.actors.removeActor(p);
         }
         while (GameClass.enemies.size > 0){
-            GameClass.enemies.get(0).setDead();
+            Enemy e = GameClass.enemies.removeIndex(0);
+            GameClass.mainWorld.actors.removeActor(e);
         }
     }
 
@@ -127,7 +128,7 @@ public class Player extends SuperActor{
         for (Enemy e : GameClass.enemies){
             if (Intersector.overlaps(e.getCollisionPolygon().getBoundingRectangle(),this.getCollisionRectangle()) && (invis == 0)) {
                 if (groundpound){
-                    e.setDead();
+                    e.die(true);
                 }
                 else {
                     GameClass.sm.takedamage.play();
@@ -135,16 +136,16 @@ public class Player extends SuperActor{
                     controlsleft.remove(controlsleft.size() - 1);
                 }
             }
-
         }
 
-        if ((controlsleft.contains("d") && (walkies == 1)) || (controlsleft.contains("a") && (walkies == -1))) {
+        if ((controlsleft.contains("d") && (walkies == 1)) || (controlsleft.contains("a") && (walkies == -1)) && !groundpound) {
             xvel += walkies * Settings.playerSpeed;
         }
 
         if (controlsleft.contains("j") && usedash && dash){
             if (invis == 0) {
                 GameClass.sm.dash.play();
+//                System.out.println("Dash used");
                 dash = false;
                 invis = dashinvis;
                 if (right) {
