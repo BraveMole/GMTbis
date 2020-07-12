@@ -24,6 +24,7 @@ public class AnimatedSprite extends Sprite {
         this.setRegion(keyFrames[frameIndex]);
         this.setPosition(x, y);
         this.setSize(width, height);
+        this.setOrigin(width/2,height/2);
         this.setRotation(rotation);
     }
 

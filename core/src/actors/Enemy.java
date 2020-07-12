@@ -1,23 +1,21 @@
 package actors;
 
-import Utilities.AnimatedSprite;
+import Utilities.Animation;
 import Utilities.Settings;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
-import com.badlogic.gdx.math.Rectangle;
 import panic.game.GameClass;
-import panic.game.TextureLoader;
 
 public class Enemy extends SuperActor {
     private Polygon collisionPolygon;
     private float width;
     private float height;
+    private boolean goesToRight;
+
     public Enemy(float x, float y) {
-        Texture text = TextureLoader.Enemy;
-        width = text.getWidth() * Settings.enemySize;
-        height = text.getHeight()*Settings.enemySize;
-        this.sprite = new AnimatedSprite(text, x, y, -90, width, height);
+        this.setSprite(Animation.ENEMY_FLYING);
+        width = Animation.ENEMY_FLYING.getWidth();
+        height = Animation.ENEMY_FLYING.getHeight();
         this.setX(x);
         this.setY(y);
         this.setRotation(90);
@@ -33,6 +31,7 @@ public class Enemy extends SuperActor {
         Player p = GameClass.character;
         float xdiff = p.getX() - this.getX();
         float ydiff = p.getY() - this.getY();
+        goesToRight = (xdiff<0);
         float hypotenuse = (float) Math.sqrt(Math.pow(xdiff, 2) + Math.pow(ydiff, 2));
 
         this.setX(this.getX() + (xdiff * Settings.enemySpeed / hypotenuse));
@@ -44,6 +43,13 @@ public class Enemy extends SuperActor {
                 this.die();
             }
         }
+        if (!this.sprite.isFlipX() && !goesToRight){
+            this.sprite.flip(true,false);
+        }
+        else if(this.sprite.isFlipX()&&goesToRight){
+            this.sprite.flip(false,false);
+        }
+
         super.act(delta);
     }
 

@@ -1,9 +1,11 @@
 package Utilities;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import panic.game.TextureLoader;
 
 public enum Animation {
-
+    ENEMY_FLYING(1 / 4f, TextureLoader.flyingEnemySpriteSheet, 100* Settings.enemySize, 90* Settings.enemySize),
+    ENEMY_DYING(1/6f,TextureLoader.dyingEnemySpriteSheet,96* Settings.enemySize,93* Settings.enemySize);
     ;
 
     private float frameDuration;
