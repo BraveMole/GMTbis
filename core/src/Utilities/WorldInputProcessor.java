@@ -63,6 +63,9 @@ public class WorldInputProcessor implements InputProcessor {
         if (keycode == Input.Keys.H){
             player.usedoublejump = true;
         }
+        if (keycode == Input.Keys.S){
+            player.usegroundpound = true;
+        }
         return false;
     }
 

@@ -2,7 +2,6 @@ package actors;
 
 import Utilities.Animation;
 import Utilities.Settings;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 import panic.game.GameClass;
@@ -18,9 +17,7 @@ public class Enemy extends SuperActor {
     private float timeToDie;
 
     public Enemy(float x, float y) {
-        dead = false;
-        firstFlip=true;
-        this.setSprite(Animation.ENEMY_FLYING_BIS);
+        this.setSprite(Animation.ENEMY_FLYING);
         width = Animation.ENEMY_FLYING.getWidth();
         height = Animation.ENEMY_FLYING.getHeight();
         this.setX(x);
@@ -56,6 +53,13 @@ public class Enemy extends SuperActor {
                         this.setSprite(Animation.ENEMY_DYING_BIS);
                     }
                 }
+        this.setX(this.getX() + (xdiff * Settings.enemySpeed / hypotenuse));
+        this.setY(this.getY() + (ydiff * Settings.enemySpeed / hypotenuse));
+        collisionPolygon.setPosition(this.getX()-width/2,this.getY()-height/2);
+        Polygon placeHodler = new Polygon();
+        for (Projectile liveProjectile : GameClass.liveProjectiles) {
+            if(Intersector.overlapConvexPolygons(liveProjectile.getCollisionPolygon(), this.getCollisionPolygon())) {
+                this.die(true);
             }
             if (firstFlip) {
                 if (goesToRight) {
@@ -81,5 +85,14 @@ public class Enemy extends SuperActor {
             }
         }
 
+    }
+
+    public void die(boolean killed){
+        if (killed) {
+            GameClass.sm.enemykilled.play();
+        }
+
+        GameClass.enemies.removeValue(this,false);
+        GameClass.mainWorld.actors.removeActor(this);
     }
 }
