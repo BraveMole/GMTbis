@@ -1,14 +1,17 @@
 package actors;
 
 import Utilities.AnimatedSprite;
+import Utilities.Animation;
 import Utilities.Settings;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector3;
 import panic.game.GameClass;
 import panic.game.ObstacleBuilder;
-import panic.game.TextureLoader;
+
+import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
 import com.badlogic.gdx.math.Rectangle;
 
@@ -39,6 +42,13 @@ public class Player extends SuperActor{
     private Rectangle collisionRectangle;
     private float width;
     private float height;
+    private boolean moving;
+    private boolean goesToTheRight;
+    private float timeToStop;
+
+    public void setGoesToTheRight(boolean goesToTheRight) {
+        this.goesToTheRight = goesToTheRight;
+    }
 
     public Player(float x, float y){
         spawnx = x;
@@ -53,11 +63,9 @@ public class Player extends SuperActor{
         totalcontrols.add("k");
 
         controlsleft = (ArrayList<String>) totalcontrols.clone();
-
-        Texture text = TextureLoader.Player;
-        width = text.getWidth() * Settings.playerSize;
-        height = text.getHeight()*Settings.playerSize;
-        this.sprite = new AnimatedSprite(text, x, y, -90, width, height);
+        this.setSprite(Animation.CHARACTER_STOPPING);
+        width = Animation.CHARACTER_STOPPING.getWidth();
+        height = Animation.CHARACTER_STOPPING.getHeight();
         this.setX(x);
         this.setY(y);
         collisionRectangle = new Rectangle(x-width/2,y-height/2,width,height);
@@ -69,16 +77,18 @@ public class Player extends SuperActor{
     }
 
     public void fire(Vector3 fireDirection){
-        GameClass.sm.shoot.play();
-        float xdiff = fireDirection.x - this.getX();
-        float ydiff = fireDirection.y - this.getY();
-        float angle = (float) Math.atan(ydiff/xdiff);
-        if (xdiff < 0){
-            angle += PI;
+        if (GameClass.liveProjectiles.size <Settings.maxProjectiles) {
+            GameClass.sm.shoot.play();
+            float xdiff = fireDirection.x - this.getX();
+            float ydiff = fireDirection.y - this.getY();
+            float angle = (float) Math.atan(ydiff / xdiff);
+            if (xdiff < 0) {
+                angle += PI;
+            }
+            Projectile projectile = new Projectile(this.getX(), this.getY(), angle);
+            GameClass.mainWorld.addActor(projectile);
+            GameClass.liveProjectiles.add(projectile);
         }
-        Projectile projectile = new Projectile(this.getX(), this.getY(), angle);
-        GameClass.mainWorld.addActor(projectile);
-        GameClass.liveProjectiles.add(projectile);
     }
 
     public void respawn(){
@@ -251,8 +261,52 @@ public class Player extends SuperActor{
             }
         }
 
+        if (goesToTheRight){
+            collisionRectangle.set(this.getX()-width/2+0.3f*width,this.getY()-height/2,width*0.7f,height);
+        }
+        else{
+            collisionRectangle.set(this.getX()-width/2,this.getY()-height/2,width*0.7f,height);
+        }
+        if (xvel>5){
+            goesToTheRight = true;
+        }
+        else if (xvel<-5){
+            goesToTheRight = false;
+        }
+
+
 
         super.act(delta);
+        if (moving & Math.abs(xvel)<5){
+            moving = false;
+            timeToStop = 0;
+            if (goesToTheRight){
+                this.setSprite(Animation.CHARACTER_STOPPING_BIS);
+            }
+            else{
+                this.setSprite(Animation.CHARACTER_STOPPING);
+            }
+        }
+        if (!moving & Math.abs(xvel)<5){
+            timeToStop+= Gdx.graphics.getDeltaTime();
+            if (timeToStop>Animation.CHARACTER_STOPPING.getAnimationDuration()){
+                if (goesToTheRight){
+                    this.setSprite(Animation.CHARACTER_STOPPED_BIS);
+                }
+                else{
+                    this.setSprite(Animation.CHARACTER_STOPPED);
+                }
+            }
+        }
+        else if (!moving & Math.abs(xvel)>5){
+            moving = true;
+            if (goesToTheRight){
+                this.setSprite(Animation.CHARACTER_RUNNING_BIS);
+            }
+            else{
+                this.setSprite(Animation.CHARACTER_RUNNING);
+            }
+        }
     }
 
     public boolean onTheGround(){
