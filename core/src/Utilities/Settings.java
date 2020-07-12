@@ -9,4 +9,6 @@ public class Settings {
     public static float playerSize =1.5f;
     public static float enemySize = 1f;
     public static float projectileSize=1f;
+    public static float timeBetweenTwoApparition = 0.5f;
+    public static float timeBetweenTwoAugmentation = 5f;
 }
