@@ -2,6 +2,7 @@ package panic.game;
 
 import Utilities.Settings;
 import actors.Enemy;
+import actors.Projectile;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -15,6 +16,7 @@ public class GameClass extends ApplicationAdapter {
     public static World mainWorld;
     public static HUD hud;
     public static Player character;
+    public static Array<Projectile> liveProjectiles;
     public static ShapeRenderer debugrender;
     public static Array<Enemy> enemies;
     public static boolean debug = true;
@@ -30,6 +32,15 @@ public class GameClass extends ApplicationAdapter {
         renderer = new OrthogonalTiledMapRenderer(TextureLoader.map);
         debugrender = new ShapeRenderer();
         enemies = new Array<>();
+        liveProjectiles = new Array<>();
+    }
+
+    public void addLiveProjectile(Projectile projectile){
+        liveProjectiles.add(projectile);
+    }
+
+    public void removeLiveProjectile(Projectile projectile){
+        liveProjectiles.removeValue(projectile,false);
     }
 
     @Override

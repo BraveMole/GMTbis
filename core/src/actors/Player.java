@@ -1,16 +1,18 @@
 package actors;
 
 import Utilities.AnimatedSprite;
+import Utilities.Settings;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector3;
 import panic.game.GameClass;
 import panic.game.ObstacleBuilder;
 import panic.game.TextureLoader;
 import java.util.ArrayList;
 import com.badlogic.gdx.math.Rectangle;
 
+import static java.lang.Math.PI;
+
 public class Player extends SuperActor{
-    final static int speed = 20;
-    final static int dashspeed = 500;
     final static int height = 50;
     final static int invisframes = 240;
     final static int dashinvis = 10;
@@ -45,6 +47,17 @@ public class Player extends SuperActor{
         this.setRotation(90);
     }
 
+    public void fire(Vector3 fireDirection){
+        float xdiff = fireDirection.x - this.getX();
+        float ydiff = fireDirection.y - this.getY();
+        float angle =(float)Math.atan(ydiff/xdiff);
+        if (xdiff<0){
+            angle+=PI;
+        }
+        Projectile projectile = new Projectile(this.getX(),this.getY(),angle);
+        GameClass.mainWorld.addActor(projectile);
+    }
+
     @Override
     public void act(float delta) {
         if (walkies == -1 && right){
@@ -65,7 +78,7 @@ public class Player extends SuperActor{
         }
 
         if ((controlsleft.contains("d")&& (walkies == 1)) || (controlsleft.contains("a") && (walkies == -1))) {
-            xvel += walkies * speed;
+            xvel += walkies * Settings.playerSpeed;
         }
 
         if (usedash && dash){
@@ -74,10 +87,10 @@ public class Player extends SuperActor{
                 dash = false;
                 invis = dashinvis;
                 if (right) {
-                    xvel += dashspeed;
+                    xvel +=Settings.dashSpeed;
                 }
                 else{
-                    xvel -= dashspeed;
+                    xvel -= Settings.dashSpeed;
                 }
             }
         }

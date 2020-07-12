@@ -11,6 +11,7 @@ public class TextureLoader {
     public static TiledMap map;
     public static Texture Player;
     public static Texture Enemy;
+    public static Texture Projectile;
     public static Texture[] KEYS = new Texture[14];
 
     public static void loadTexture() {
@@ -35,6 +36,7 @@ public class TextureLoader {
         KEYS[11] = new Texture("J_no.png");
         KEYS[12] = new Texture("K.png");
         KEYS[13] = new Texture("K_no.png");
+        Projectile = new Texture("placeHolderProjectile.png");
     }
 
     private static void loadMap() {

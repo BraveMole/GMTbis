@@ -1,9 +1,9 @@
 package Utilities;
 
 public class Settings {
-    public static float friction=0.8f;
-    public static float metersToPixelRatio=0.1f;
-    public static float metersOnScreen =5;
-    public static float playerSpeed =10;
     public static String layerName = "Ground";
+    public static float projectileSpeed = 100;
+    public static float enemySpeed = 4;
+    public static float playerSpeed = 20;
+    public static float dashSpeed = 200;
 }

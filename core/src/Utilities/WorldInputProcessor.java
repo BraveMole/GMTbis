@@ -12,7 +12,6 @@ import actors.Player;
 
 public class WorldInputProcessor implements InputProcessor {
     public Player player;
-    public static float worldZoom;
     private boolean rightButtonHold = false;
     private Vector3 originMoveCam;
     private Viewport viewport;
@@ -39,7 +38,6 @@ public class WorldInputProcessor implements InputProcessor {
 
 
     public void act() {
-        this.renderZoom();
         this.renderPan();
     }
 
@@ -81,38 +79,13 @@ public class WorldInputProcessor implements InputProcessor {
     }
 
 
-    private void renderZoom() {
-        if (timeToCameraZoomTarget >= 0) {
-            timeToCameraZoomTarget -= Gdx.graphics.getDeltaTime();
-            float progress = timeToCameraZoomTarget < 0 ? 1 : 1f - timeToCameraZoomTarget / zoomduration;
-            ((OrthographicCamera) this.viewport.getCamera()).zoom = Interpolation.pow3Out.apply(cameraZoomOrigin, cameraZoomTarget, progress);
-            worldZoom = ((OrthographicCamera) this.viewport.getCamera()).zoom;
-        }
-    }
 
-    private void zoomBy(float zoomAmount) {
-        this.zoomTo(cameraZoomTarget * (zoomAmount));
-    }
-
-    private void zoomTo(float zoomAmount) {
-        cameraZoomOrigin = ((OrthographicCamera) this.viewport.getCamera()).zoom;
-        worldZoom = cameraZoomOrigin;
-        cameraZoomTarget = zoomAmount;
-        timeToCameraZoomTarget = zoomduration;
-    }
 
     @Override
     public boolean keyTyped(char character) {
         return false;
     }
 
-    @Override
-    public boolean scrolled(int amount) {
-
-        this.zoomBy(1 + amount * 0.2f);
-        this.viewport.getCamera().update();
-        return true;
-    }
 
     private void renderPan() {
         if (this.timeToCameraPositionTarget > 0) {
@@ -125,19 +98,11 @@ public class WorldInputProcessor implements InputProcessor {
         }
     }
 
-    private void panTo(float x, float y) {
-        this.timeToCameraPositionTarget = this.panduration;
-        this.xcameradest = x;
-        this.ycameradest = y;
-        this.xcameraori = this.worldStage.getCamera().position.x;
-        this.ycameraori = this.worldStage.getCamera().position.y;
-    }
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if (button == Input.Buttons.RIGHT) {
-            this.rightButtonHold = true;
-            originMoveCam.set(screenX, screenY, 0);
+        if (button == Input.Buttons.LEFT) {
+            player.fire(this.viewport.getCamera().unproject(new Vector3(screenX,screenY,0)));
         }
         return false;
     }
@@ -162,6 +127,11 @@ public class WorldInputProcessor implements InputProcessor {
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
+        return false;
+    }
+
+    @Override
+    public boolean scrolled(int amount) {
         return false;
     }
 }

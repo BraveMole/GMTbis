@@ -14,6 +14,7 @@ public class SuperActor extends Actor {
     public void draw(Batch batch, float parentAlpha) {
         if (mustBeDrawn()) {
             this.sprite.animate(Gdx.graphics.getDeltaTime());
+            sprite.setOrigin(sprite.getWidth()/2,sprite.getHeight()/2);
             this.sprite.setPosition(this.getX(), this.getY());
             this.sprite.setRotation(this.getRotation() - 90);
             this.sprite.draw(batch);
