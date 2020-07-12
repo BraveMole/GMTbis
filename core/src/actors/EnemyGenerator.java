@@ -2,10 +2,7 @@ package actors;
 
 import Utilities.Settings;
 import com.badlogic.gdx.Gdx;
-import com.sun.javafx.sg.prism.NGAmbientLight;
 import panic.game.GameClass;
-
-import java.util.Set;
 
 public class EnemyGenerator {
     int maxenemies;
@@ -44,10 +41,10 @@ public class EnemyGenerator {
                 }
             }
         }
-       /* if (timeSinceLastAugmentationOfEnemies>Settings.timeBetweenTwoAugmentation){
+       if (timeSinceLastAugmentationOfEnemies>Settings.timeBetweenTwoAugmentation){
             timeSinceLastAugmentationOfEnemies=0;
             maxenemies+=1;
-        }*/
+        }
 
     }
 }
