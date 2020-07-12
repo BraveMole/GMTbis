@@ -29,6 +29,7 @@ public class GameClass extends ApplicationAdapter {
     public void create() {
         TextureLoader.loadTexture();
         ObstacleBuilder.buildBuildingsBodies(TextureLoader.map, Settings.layerName1);
+        ObstacleBuilder.buildBuildingsBodies(TextureLoader.map, Settings.layerName2);
         character = new Player(ObstacleBuilder.middleOfMap().x,ObstacleBuilder.middleOfMap().y+100);
         background = new Background();
         mainWorld = new World();
