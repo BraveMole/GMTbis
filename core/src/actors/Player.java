@@ -47,7 +47,7 @@ public class Player extends SuperActor{
         }
 
         xvel *= 0.5f;
-        yvel -= 1;
+        //yvel -= 1;
 
         if ((this.getY() < 0) && (yvel < 0)){
             this.setY(0);

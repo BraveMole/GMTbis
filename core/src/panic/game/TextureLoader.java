@@ -35,7 +35,7 @@ public class TextureLoader {
     }
 
     private static void loadMap() {
-        String filename ="MAPS/Map1.tmx";
+        String filename ="bigmap.tmx";
         manager = new AssetManager();
         manager.setLoader(TiledMap.class, new TmxMapLoader());
         manager.load(filename, TiledMap.class);

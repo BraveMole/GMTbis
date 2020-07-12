@@ -15,7 +15,7 @@ public class GameClass extends ApplicationAdapter {
     public static HUD hud;
     public static Player character;
     public static ShapeRenderer debugrender;
-    public static boolean debug = false;
+    public static boolean debug = true;
     private OrthogonalTiledMapRenderer renderer;
 
     @Override
@@ -24,11 +24,9 @@ public class GameClass extends ApplicationAdapter {
         ObstacleBuilder.buildBuildingsBodies(TextureLoader.map, Settings.layerName);
         character = new Player(ObstacleBuilder.middleOfMap().x,ObstacleBuilder.middleOfMap().y+100);
         mainWorld = new World();
-        hud = new HUD((SpriteBatch)mainWorld.getBatch());
+        hud = new HUD();
         renderer = new OrthogonalTiledMapRenderer(TextureLoader.map);
         debugrender = new ShapeRenderer();
-
-
     }
 
     @Override
@@ -39,9 +37,9 @@ public class GameClass extends ApplicationAdapter {
         renderer.setView((OrthographicCamera)mainWorld.getViewport().getCamera());
         renderer.render();
 
+
         mainWorld.act();
         mainWorld.draw();
-
 
         if (debug) {
             debugrender.setProjectionMatrix(mainWorld.getViewport().getCamera().combined);
@@ -51,7 +49,10 @@ public class GameClass extends ApplicationAdapter {
                 debugrender.rect(ObstacleBuilder.Bounds.get(i).x, ObstacleBuilder.Bounds.get(i).y, ObstacleBuilder.Bounds.get(i).width, ObstacleBuilder.Bounds.get(i).height);
             }
             debugrender.end();
+
+
         }
+        hud.render();
     }
 
     @Override

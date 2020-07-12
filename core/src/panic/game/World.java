@@ -1,5 +1,6 @@
 package panic.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Group;
 
@@ -29,6 +30,7 @@ public class World extends Stage {
         this.getViewport().getCamera().position.set(GameClass.character.getX(), GameClass.character.getY(), 0);
         this.getViewport().getCamera().update();
         super.draw();
+
     }
 
 }
