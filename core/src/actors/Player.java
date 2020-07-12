@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class Player extends SuperActor{
     static int speed = 20;
-    static int height = 20;
+    static int height = 50;
     double xvel = 0f;
     double yvel = 0f;
 
@@ -38,52 +38,83 @@ public class Player extends SuperActor{
 
     @Override
     public void act(float delta) {
-//        System.out.println(this.getX());
-//        System.out.println(this.getY());
-//        System.out.println(xvel);
         if ((controlsleft.contains("d") && (walkies == 1)) || (controlsleft.contains("a") && (walkies == -1))) {
             xvel += walkies * speed;
         }
-        if (controlsleft.contains("w")){
+        if (onTheGround() && controlsleft.contains("w")){
             yvel += uppies * height;
         }
 
         xvel *= 0.5f;
         yvel -= 1;
+        yvel *= 0.9f;
 
-        if ((this.getY() < 0) && (yvel < 0)){
-            this.setY(0);
+
+        if ((onTheGround() || (this.getY() < 0)) && (yvel <= 0)){
             yvel = 0;
         }
 
+        float originalX = this.getX();
+        float originalY = this.getY();
+
         this.setX((float) (this.getX() + xvel));
         this.setY((float) (this.getY() + yvel));
+
+
+        if (bumping()){
+            System.out.println("bump");
+            this.setX(originalX);
+            this.setY(originalY);
+        }
+
         super.act(delta);
     }
 
-    public static int collision(float x1, float y1, float width1, float height1, float x2, float y2, float width2, float height2) {
-        // 1 = Object 1 collided on the right of Object 2
-        // 2 = Object 1 collided on the left of Object 2
-        // 3 = Object 1 collided on bottom of Object 2
-        // 4 = Object 1 collided on top of Object 2
-        if (x1 > x2 + width2)
+    public static int collide(float x1, float y1, float width1, float height1, float x2, float y2, float width2, float height2) {
+/*
+        if (x1 < x2 + width2 && x1 + width1 > x2 && y1 < y2 + height2 && y1 + height1 > y2) {
+            return true;
+        }
+        return false;
+
+ */
+        if (x1 > x2 + width2){
             return 1;
-        if (x1 + width1 < x2)
+        }
+        if (x1 + width1 < x2){
             return 2;
-        if (y1 > y2 + height2)
+        }
+        if (y1 > y2 + height2){
             return 3;
-        if (y1 + height1 < y2) {
+        }
+        if (y1 + height1 < y2){
             return 4;
         }
         return 0;
     }
 
     public boolean onTheGround(){
+        if (this.getY() < 0){
+            return true;
+        }
+
         for (Rectangle r : ObstacleBuilder.Bounds){
-            if (collision(this.getX(), this.getY(), this.getWidth(), this.getHeight(), r.getX(), r.getY(), r.getWidth(), r.getHeight()) == 4){
+            int a = collide(this.getX(), this.getY(), this.getWidth(), this.getHeight(), r.getX(), r.getY(), r.getWidth(), r.getHeight());
+            if ((a == 0) && (this.getY() + r.height > r.getY())){
                 return true;
             }
         }
         return false;
     }
+
+    public boolean bumping(){
+        for (Rectangle r : ObstacleBuilder.Bounds){
+            int a = collide(this.getX(), this.getY(), this.getWidth(), this.getHeight(), r.getX(), r.getY(), r.getWidth(), r.getHeight());
+            if ((a == 0) && (this.getY() < r.getY() + r.getHeight() - 10)){
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

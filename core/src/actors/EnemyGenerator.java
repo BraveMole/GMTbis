@@ -1,6 +1,5 @@
 package actors;
 
 public class EnemyGenerator {
-    private int maxennemies;
-
+    private int maxennemies = 10;
 }

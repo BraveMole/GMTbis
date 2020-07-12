@@ -1,23 +1,16 @@
 package panic.game;
 
-import Utilities.Settings;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.MapObjects;
-import com.badlogic.gdx.maps.MapProperties;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.utils.Array;
 
 public class TextureLoader {
     public static AssetManager manager;
     public static TiledMap map;
     public static Texture Player;
+    public static Texture Enemy;
     public static Texture[] KEYS = new Texture[14];
 
     public static void loadTexture() {
@@ -27,6 +20,7 @@ public class TextureLoader {
 
     private static void loadTextureActors(){
         Player = new Texture("Triston.png");
+        Enemy = new Texture("pacfrog2.png");
         KEYS[0] = new Texture("W.png");
         KEYS[1] = new Texture("W_no.png");
         KEYS[2] = new Texture("D.png");
@@ -44,7 +38,7 @@ public class TextureLoader {
     }
 
     private static void loadMap() {
-        String filename ="testLevel2.tmx";
+        String filename ="Map1.tmx";
         manager = new AssetManager();
         manager.setLoader(TiledMap.class, new TmxMapLoader());
         manager.load(filename, TiledMap.class);
