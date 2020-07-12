@@ -40,7 +40,7 @@ public class GameClass extends ApplicationAdapter {
         enemies = new Array<>();
         liveProjectiles = new Array<>();
         sm = new SoundMaker();
-        sm.battle.setLooping(true);
+        sm.battle.loop();
         sm.battle.play();
 
     }

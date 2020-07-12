@@ -6,7 +6,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 
 public class SoundMaker {
-    public Music battle;
+    public Sound battle;
     public Sound dash;
     public Sound doublejump;
     public Sound enemykilled;
@@ -22,7 +22,7 @@ public class SoundMaker {
     }
 
     public void load(){
-        battle = Gdx.audio.newMusic(Gdx.files.internal("music/Battle1.wav"));
+        battle = Gdx.audio.newSound(Gdx.files.internal("music/Battle1.wav"));
         dash = Gdx.audio.newSound(Gdx.files.internal("music/Dash.wav"));
         doublejump = Gdx.audio.newSound(Gdx.files.internal("music/DoubleJump.wav"));
         enemykilled = Gdx.audio.newSound(Gdx.files.internal("music/EnemyKilled.wav"));
