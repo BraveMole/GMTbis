@@ -21,7 +21,7 @@ public class GameClass extends ApplicationAdapter {
     public static Array<Projectile> liveProjectiles;
     public static ShapeRenderer debugrender;
     public static Array<Enemy> enemies;
-    public static boolean debug = true;
+    public static boolean debug = false;
     public static SoundMaker sm;
     private OrthogonalTiledMapRenderer renderer;
 

@@ -101,7 +101,8 @@ public class Player extends SuperActor{
             GameClass.mainWorld.actors.removeActor(p);
         }
         while (GameClass.enemies.size > 0){
-            GameClass.enemies.get(0).die(false);
+            Enemy e = GameClass.enemies.removeIndex(0);
+            GameClass.mainWorld.actors.removeActor(e);
         }
     }
 
