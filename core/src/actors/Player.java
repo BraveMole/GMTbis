@@ -153,6 +153,8 @@ public class Player extends SuperActor{
                 else {
                     GameClass.sm.takedamage.play();
                     invis = invisframes;
+                    GameClass.mainWorld.actors.removeActor(e);
+                    GameClass.enemies.removeValue(e,false);
                     controlsleft.remove(controlsleft.size() - 1);
                 }
             }
