@@ -24,6 +24,7 @@ public class GameClass extends ApplicationAdapter {
     public static boolean debug = false;
     public static SoundMaker sm;
     private OrthogonalTiledMapRenderer renderer;
+    private int numberOfEnemyKilled;
 
     @Override
     public void create() {
@@ -39,6 +40,10 @@ public class GameClass extends ApplicationAdapter {
         enemies = new Array<>();
         liveProjectiles = new Array<>();
         sm = new SoundMaker();
+    }
+
+    public void enemyKilled(){
+
     }
 
     @Override
