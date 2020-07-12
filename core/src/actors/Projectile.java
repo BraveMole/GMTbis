@@ -15,7 +15,8 @@ public class Projectile extends SuperActor {
     private float height;
     private float flightTime;
     public Projectile(float x, float y, float directionAngle){
-        this.setX(x);this.setY(y);
+        this.setX(x);
+        this.setY(y);
         Texture text = TextureLoader.Projectile;
         this.directionAngle = directionAngle;
         this.setRotation((float)Math.toDegrees(directionAngle)-90);

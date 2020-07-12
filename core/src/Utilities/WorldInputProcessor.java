@@ -46,12 +46,10 @@ public class WorldInputProcessor implements InputProcessor {
     public boolean keyDown(int keycode) {
         if ((keycode == Input.Keys.D) || (keycode == Input.Keys.RIGHT)){
             player.walkies = 1;
-            player.setGoesToTheRight(true);
             return true;
         }
         if ((keycode == Input.Keys.A) || (keycode == Input.Keys.LEFT)|| (keycode==Input.Keys.Q)){
             player.walkies = -1;
-            player.setGoesToTheRight(false);
             return true;
         }
         if ((keycode == Input.Keys.W) || (keycode == Input.Keys.UP) || (keycode==Input.Keys.Z)){
@@ -66,6 +64,9 @@ public class WorldInputProcessor implements InputProcessor {
         }
         if (keycode == Input.Keys.S|| (keycode == Input.Keys.DOWN)){
             player.usegroundpound = true;
+        }
+        if (keycode == Input.Keys.K && player.controlsleft.contains("k")){
+            player.open = true;
         }
         return false;
     }

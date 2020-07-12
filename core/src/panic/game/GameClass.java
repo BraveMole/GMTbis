@@ -30,7 +30,6 @@ public class GameClass extends ApplicationAdapter {
 
     @Override
     public void create() {
-        menuPassed=false;
         TextureLoader.loadTexture();
         ObstacleBuilder.buildBuildingsBodies(TextureLoader.map, Settings.layerName1);
         ObstacleBuilder.buildBuildingsBodies(TextureLoader.map, Settings.layerName2);

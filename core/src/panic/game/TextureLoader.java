@@ -13,6 +13,7 @@ public class TextureLoader {
     public static Texture Player;
     public static Texture Enemy;
     public static Texture Projectile;
+    public static Texture Portal;
     public static Texture[] KEYS = new Texture[14];
     public static Texture background;
     public static TextureRegion[] flyingEnemySpriteSheet;
@@ -42,6 +43,7 @@ public class TextureLoader {
     private static void loadTextureActors(){
         Player = new Texture("Triston.png");
         Enemy = new Texture("pacfrog2.png");
+        Portal = new Texture("Portal.png");
         KEYS[0] = new Texture("W.png");
         KEYS[1] = new Texture("W_no.png");
         KEYS[2] = new Texture("D.png");

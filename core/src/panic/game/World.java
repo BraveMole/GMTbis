@@ -1,13 +1,10 @@
 package panic.game;
 
 import Utilities.WorldInputProcessor;
-import actors.Enemy;
-import actors.EnemyGenerator;
-import actors.Key;
+import actors.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.utils.Array;
-import actors.Player;
 
 import java.util.EmptyStackException;
 
@@ -16,13 +13,16 @@ public class World extends Stage {
     public EnemyGenerator eg = new EnemyGenerator(7000, 1000);
     public WorldInputProcessor inputProcessor;
     public Player p;
+    public Portal portal;
 
     public int[] x = {100, 150, 50, 100, 250, 300, 350};
     public int[] y = {150, 100, 100, 100, 125, 125, 125};
 
     public World() {
         p = GameClass.character;
+        portal = new Portal(8000, 8500);
         actors.addActor(p);
+        actors.addActor(portal);
         inputProcessor = new WorldInputProcessor(this.getViewport(), this, p);
         super.addActor(actors);
         this.getViewport().getCamera().viewportHeight = this.getViewport().getScreenHeight();

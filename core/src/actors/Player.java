@@ -39,17 +39,13 @@ public class Player extends SuperActor{
     public boolean usedoublejump = false;
     public boolean usedash = false;
     public boolean usegroundpound = false;
+    public boolean open = false;
     private Rectangle collisionRectangle;
     private float width;
     private float height;
     private boolean moving;
-    private boolean goesToTheRight;
     private float timeToStop;
     private int numberOfEnemyKilled;
-
-    public void setGoesToTheRight(boolean goesToTheRight) {
-        this.goesToTheRight = goesToTheRight;
-    }
 
     public Player(float x, float y){
         spawnx = x;
@@ -99,7 +95,7 @@ public class Player extends SuperActor{
 
     public void  killedEnemy(){
         numberOfEnemyKilled++;
-        if (numberOfEnemyKilled>Settings.numberOfEnemiesToKill) {
+        if (numberOfEnemyKilled > Settings.numberOfEnemiesToKill) {
             numberOfEnemyKilled = 0;
             this.addKey();
         }
@@ -121,13 +117,21 @@ public class Player extends SuperActor{
     }
 
     public void addKey(){
-        if(controlsleft.size()<totalcontrols.size()){
+        if(controlsleft.size() < totalcontrols.size()){
+            GameClass.sm.gain.play();
             controlsleft.add(totalcontrols.get(controlsleft.size()));
+        }
+        if (controlsleft.size() == totalcontrols.size()){
+            GameClass.sm.full.play();
         }
     }
 
     @Override
     public void act(float delta) {
+        if (open && !controlsleft.contains("k")){
+            open = false;
+        }
+
         if (this.getY() < 7800){
             respawn();
         }
@@ -277,43 +281,35 @@ public class Player extends SuperActor{
         else if(bumpingRight()){
             this.setX(originalX-5);
             if (xvel>=0){
-                xvel =-xvel*0.3f;
+                xvel =- xvel*0.3f;
             }
             else{
-                xvel-=1;
+                xvel -= 1;
             }
         }
 
-        if (goesToTheRight){
+        if (right){
             collisionRectangle.set(this.getX()-width/2+0.3f*width,this.getY()-height/2,width*0.7f,height);
         }
         else{
             collisionRectangle.set(this.getX()-width/2,this.getY()-height/2,width*0.7f,height);
         }
-        if (xvel>5){
-            goesToTheRight = true;
-        }
-        else if (xvel<-5){
-            goesToTheRight = false;
-        }
-
-
 
         super.act(delta);
         if (moving & Math.abs(xvel)<5){
             moving = false;
             timeToStop = 0;
-            if (goesToTheRight){
+            if (right){
                 this.setSprite(Animation.CHARACTER_STOPPING_BIS);
             }
             else{
                 this.setSprite(Animation.CHARACTER_STOPPING);
             }
         }
-        if (!moving & Math.abs(xvel)<5){
+        if (!moving & Math.abs(xvel) < 5){
             timeToStop+= Gdx.graphics.getDeltaTime();
             if (timeToStop>Animation.CHARACTER_STOPPING.getAnimationDuration()){
-                if (goesToTheRight){
+                if (right){
                     this.setSprite(Animation.CHARACTER_STOPPED_BIS);
                 }
                 else{
@@ -321,9 +317,9 @@ public class Player extends SuperActor{
                 }
             }
         }
-        else if (!moving & Math.abs(xvel)>5){
+        else if (!moving & Math.abs(xvel) > 5){
             moving = true;
-            if (goesToTheRight){
+            if (right){
                 this.setSprite(Animation.CHARACTER_RUNNING_BIS);
             }
             else{
