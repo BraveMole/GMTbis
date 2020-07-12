@@ -13,7 +13,7 @@ import java.util.EmptyStackException;
 
 public class World extends Stage {
     public Group actors = new Group();
-    public EnemyGenerator eg = new EnemyGenerator(7000, 8000, 6000, 1000);
+    public EnemyGenerator eg = new EnemyGenerator(7000, 1000);
     public WorldInputProcessor inputProcessor;
     public Player p;
 

@@ -76,7 +76,7 @@ public class Enemy extends SuperActor {
         }
         else{
             timeToDie += Gdx.graphics.getDeltaTime();
-            if (timeToDie>Animation.ENEMY_DYING.getAnimationDuration()){
+            if (timeToDie>Animation.ENEMY_DYING.getAnimationDuration()-0.05f){
                 GameClass.mainWorld.actors.removeActor(this);
             }
         }

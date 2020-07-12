@@ -67,15 +67,17 @@ public class Player extends SuperActor{
     }
 
     public void fire(Vector3 fireDirection){
-        float xdiff = fireDirection.x - this.getX();
-        float ydiff = fireDirection.y - this.getY();
-        float angle =(float)Math.atan(ydiff/xdiff);
-        if (xdiff<0){
-            angle+=PI;
+        if (GameClass.liveProjectiles.size <Settings.maxProjectiles) {
+            float xdiff = fireDirection.x - this.getX();
+            float ydiff = fireDirection.y - this.getY();
+            float angle = (float) Math.atan(ydiff / xdiff);
+            if (xdiff < 0) {
+                angle += PI;
+            }
+            Projectile projectile = new Projectile(this.getX(), this.getY(), angle);
+            GameClass.mainWorld.addActor(projectile);
+            GameClass.liveProjectiles.add(projectile);
         }
-        Projectile projectile = new Projectile(this.getX(),this.getY(),angle);
-        GameClass.mainWorld.addActor(projectile);
-        GameClass.liveProjectiles.add(projectile);
     }
 
     @Override

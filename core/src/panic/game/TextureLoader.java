@@ -48,7 +48,7 @@ public class TextureLoader {
         KEYS[11] = new Texture("J_no.png");
         KEYS[12] = new Texture("K.png");
         KEYS[13] = new Texture("K_no.png");
-        Projectile = new Texture("placeHolderProjectile.png");
+        Projectile = new Texture("projectile.png");
         background = new Texture("background.png");
         loadEnemiesTexture();
         loadCharacterTexture();
