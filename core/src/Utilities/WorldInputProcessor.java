@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import panic.game.GameClass;
 import panic.game.World;
 import actors.Player;
 
@@ -109,8 +110,13 @@ public class WorldInputProcessor implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if (button == Input.Buttons.LEFT) {
+        if (button == Input.Buttons.LEFT && GameClass.menuPassed) {
             player.fire(this.viewport.getCamera().unproject(new Vector3(screenX,screenY,0)));
+        }
+        if (!GameClass.menuPassed & button == Input.Buttons.LEFT){
+            if (screenX>500 & screenX <800 & screenY >280 & screenY<430){
+                GameClass.menuPassed=true;
+            }
         }
         return false;
     }

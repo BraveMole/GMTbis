@@ -21,7 +21,7 @@ public class Background {
     public void render(){
         batch.setProjectionMatrix(stage.getViewport().getCamera().combined);
         batch.begin();
-        batch.draw(TextureLoader.background,0,0,1300,650);
+        batch.draw(TextureLoader.background,0,0,1600,650);
         batch.end();
     }
 }
