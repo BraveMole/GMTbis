@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="500" height="500" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="17">
- <tileset firstgid="1" source="MAPS/land.tsx"/>
- <tileset firstgid="217" source="MAPS/fungi1.tsx"/>
- <tileset firstgid="226" source="MAPS/fungi2.tsx"/>
- <tileset firstgid="235" source="MAPS/fungi3.tsx"/>
- <tileset firstgid="244" source="MAPS/fungi5.tsx"/>
- <tileset firstgid="253" source="GMTK/Art/platform.tsx"/>
- <tileset firstgid="265" source="GMTK/Art/Stands.tsx"/>
- <tileset firstgid="589" source="GMTK/Art/lamp.tsx"/>
- <tileset firstgid="661" source="GMTK/Art/trash mossy.tsx"/>
+ <tileset firstgid="1" source="land.tsx"/>
+ <tileset firstgid="217" source="fungi1.tsx"/>
+ <tileset firstgid="226" source="fungi2.tsx"/>
+ <tileset firstgid="235" source="fungi3.tsx"/>
+ <tileset firstgid="244" source="fungi5.tsx"/>
+ <tileset firstgid="253" source="platform.tsx"/>
+ <tileset firstgid="265" source="Stands.tsx"/>
+ <tileset firstgid="589" source="lamp.tsx"/>
+ <tileset firstgid="661" source="trash mossy.tsx"/>
  <tileset firstgid="670" source="trash.tsx"/>
  <layer id="3" name="Tile Layer 3" width="500" height="500">
   <data encoding="base64" compression="zlib">

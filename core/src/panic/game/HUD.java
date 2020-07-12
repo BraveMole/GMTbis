@@ -26,6 +26,7 @@ public class HUD  {
             keys.add(k);
             stage.addActor(k);
         }
+
     }
 
 
