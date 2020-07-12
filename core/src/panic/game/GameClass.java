@@ -69,6 +69,7 @@ public class GameClass extends ApplicationAdapter {
                 for (Projectile liveProjectile : liveProjectiles) {
                     debugrender.polygon(liveProjectile.getCollisionPolygon().getTransformedVertices());
                 }
+                debugrender.rect(mainWorld.portal.getCollisionRectangle().x,mainWorld.portal.getCollisionRectangle().y,mainWorld.portal.getCollisionRectangle().width,mainWorld.portal.getCollisionRectangle().height);
                 debugrender.end();
             }
             hud.render();
