@@ -14,6 +14,8 @@ public class SoundMaker {
     public Sound lose;
     public Sound shoot;
     public Sound takedamage;
+    public Sound gain;
+    public Sound full;
 
     public SoundMaker(){
         load();
@@ -28,9 +30,11 @@ public class SoundMaker {
         lose = Gdx.audio.newSound(Gdx.files.internal("music/Lose.wav"));
         shoot = Gdx.audio.newSound(Gdx.files.internal("music/Shoot.wav"));
         takedamage = Gdx.audio.newSound(Gdx.files.internal("music/TakeDamage.wav"));
+        gain = Gdx.audio.newSound(Gdx.files.internal("music/Gain.wav"));
+        full = Gdx.audio.newSound(Gdx.files.internal("music/Full.wav"));
 
         battle.setVolume(1f);
-        battle.setLooping(false);
+        battle.setLooping(true);
         battle.play();
     }
 }

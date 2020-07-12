@@ -41,11 +41,7 @@ public class GameClass extends ApplicationAdapter {
         liveProjectiles = new Array<>();
         sm = new SoundMaker();
     }
-
-    public void enemyKilled(){
-
-    }
-
+    
     @Override
     public void render() {
         Gdx.gl.glClearColor(1, 1, 1, 1);

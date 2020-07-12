@@ -39,6 +39,7 @@ public class Player extends SuperActor{
     public boolean usedoublejump = false;
     public boolean usedash = false;
     public boolean usegroundpound = false;
+    public boolean open = false;
     private Rectangle collisionRectangle;
     private float width;
     private float height;
@@ -94,7 +95,7 @@ public class Player extends SuperActor{
 
     public void  killedEnemy(){
         numberOfEnemyKilled++;
-        if (numberOfEnemyKilled>Settings.numberOfEnemiesToKill) {
+        if (numberOfEnemyKilled > Settings.numberOfEnemiesToKill) {
             numberOfEnemyKilled = 0;
             this.addKey();
         }
@@ -116,13 +117,21 @@ public class Player extends SuperActor{
     }
 
     public void addKey(){
-        if(controlsleft.size()<totalcontrols.size()){
+        if(controlsleft.size() < totalcontrols.size()){
+            GameClass.sm.gain.play();
             controlsleft.add(totalcontrols.get(controlsleft.size()));
+        }
+        if (controlsleft.size() == totalcontrols.size()){
+            GameClass.sm.full.play();
         }
     }
 
     @Override
     public void act(float delta) {
+        if (open && !controlsleft.contains("k")){
+            open = false;
+        }
+
         if (this.getY() < 7800){
             respawn();
         }

@@ -64,6 +64,9 @@ public class WorldInputProcessor implements InputProcessor {
         if (keycode == Input.Keys.S|| (keycode == Input.Keys.DOWN)){
             player.usegroundpound = true;
         }
+        if (keycode == Input.Keys.K && player.controlsleft.contains("k")){
+            player.open = true;
+        }
         return false;
     }
 
