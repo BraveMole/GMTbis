@@ -48,6 +48,7 @@ public class Enemy extends SuperActor {
             for (Projectile liveProjectile : GameClass.liveProjectiles) {
                 if (Intersector.overlapConvexPolygons(liveProjectile.getCollisionPolygon(), this.getCollisionPolygon())) {
                     GameClass.sm.enemykilled.play();
+                    GameClass.character.killedEnemy();
                     dead = true;
                     timeToDie = 0;
                     GameClass.enemies.removeValue(this,false);
@@ -76,12 +77,12 @@ public class Enemy extends SuperActor {
             super.act(delta);
         }
         else{
-            die(true);
+            die();
         }
 
     }
 
-    public void die(boolean killed){
+    public void die(){
         timeToDie += Gdx.graphics.getDeltaTime();
         if (timeToDie>Animation.ENEMY_DYING.getAnimationDuration()-0.05f){
             GameClass.mainWorld.actors.removeActor(this);

@@ -24,6 +24,7 @@ public class GameClass extends ApplicationAdapter {
     public static boolean debug = false;
     public static SoundMaker sm;
     private OrthogonalTiledMapRenderer renderer;
+    private int numberOfEnemyKilled;
 
     @Override
     public void create() {
@@ -41,12 +42,8 @@ public class GameClass extends ApplicationAdapter {
         sm = new SoundMaker();
     }
 
-    public void addLiveProjectile(Projectile projectile){
-        liveProjectiles.add(projectile);
-    }
+    public void enemyKilled(){
 
-    public void removeLiveProjectile(Projectile projectile){
-        liveProjectiles.removeValue(projectile,false);
     }
 
     @Override
@@ -56,11 +53,8 @@ public class GameClass extends ApplicationAdapter {
         background.render();
         renderer.setView((OrthographicCamera)mainWorld.getViewport().getCamera());
         renderer.render();
-
-
         mainWorld.act();
         mainWorld.draw();
-
         if (debug) {
             debugrender.setProjectionMatrix(mainWorld.getViewport().getCamera().combined);
             debugrender.begin(ShapeRenderer.ShapeType.Line);

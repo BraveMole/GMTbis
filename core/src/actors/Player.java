@@ -44,11 +44,12 @@ public class Player extends SuperActor{
     private float height;
     private boolean moving;
     private float timeToStop;
+    private int numberOfEnemyKilled;
 
     public Player(float x, float y){
         spawnx = x;
         spawny = y;
-
+        numberOfEnemyKilled = 0;
         totalcontrols.add("w");
         totalcontrols.add("d");
         totalcontrols.add("a");
@@ -56,8 +57,7 @@ public class Player extends SuperActor{
         totalcontrols.add("h");
         totalcontrols.add("j");
         totalcontrols.add("k");
-
-        controlsleft = (ArrayList<String>) totalcontrols.clone();
+        resetControls();
         this.setSprite(Animation.CHARACTER_STOPPING);
         width = Animation.CHARACTER_STOPPING.getWidth();
         height = Animation.CHARACTER_STOPPING.getHeight();
@@ -65,6 +65,12 @@ public class Player extends SuperActor{
         this.setY(y);
         collisionRectangle = new Rectangle(x-width/2,y-height/2,width,height);
         this.setRotation(90);
+    }
+    private void resetControls(){
+        controlsleft.add("w");
+        controlsleft.add("d");
+        controlsleft.add("a");
+        controlsleft.add("s");
     }
 
     public Rectangle getCollisionRectangle() {
@@ -86,9 +92,17 @@ public class Player extends SuperActor{
         }
     }
 
+    public void  killedEnemy(){
+        numberOfEnemyKilled++;
+        if (numberOfEnemyKilled>Settings.numberOfEnemiesToKill) {
+            numberOfEnemyKilled = 0;
+            this.addKey();
+        }
+    }
+
     public void respawn(){
         GameClass.sm.lose.play();
-        controlsleft = (ArrayList<String>) totalcontrols.clone();
+        resetControls();
         this.setX(spawnx);
         this.setY(spawny);
         while (GameClass.liveProjectiles.size > 0) {
@@ -98,6 +112,12 @@ public class Player extends SuperActor{
         while (GameClass.enemies.size > 0){
             Enemy e = GameClass.enemies.removeIndex(0);
             GameClass.mainWorld.actors.removeActor(e);
+        }
+    }
+
+    public void addKey(){
+        if(controlsleft.size()<totalcontrols.size()){
+            controlsleft.add(totalcontrols.get(controlsleft.size()));
         }
     }
 
@@ -123,7 +143,7 @@ public class Player extends SuperActor{
         for (Enemy e : GameClass.enemies){
             if (Intersector.overlaps(e.getCollisionPolygon().getBoundingRectangle(),this.getCollisionRectangle()) && (invis == 0)) {
                 if (groundpound){
-                    e.die(true);
+                    e.die();
                 }
                 else {
                     GameClass.sm.takedamage.play();

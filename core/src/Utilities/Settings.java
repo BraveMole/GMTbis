@@ -4,7 +4,7 @@ public class Settings {
     public static String layerName1 = "Ground";
     public static String layerName2 = "Platform";
     public static float projectileSpeed = 400;
-    public static float enemySpeed = 3;
+    public static float enemySpeed = 5;
     public static float playerSpeed = 20;
     public static float dashSpeed = 200;
     public static float playerSize = 0.5f;
@@ -19,4 +19,6 @@ public class Settings {
     public static float airresistance = 0.9f;
     public static float flightTime = 1f;
     public static float maxProjectiles = 5;
+    public static int maxEnemies = 10;
+    public static int numberOfEnemiesToKill = 10;
 }
