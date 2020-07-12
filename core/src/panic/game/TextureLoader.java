@@ -16,7 +16,9 @@ public class TextureLoader {
     public static Texture[] KEYS = new Texture[14];
     public static Texture background;
     public static TextureRegion[] flyingEnemySpriteSheet;
+    public static TextureRegion[] flyingEnemySpriteSheetBis;
     public static TextureRegion[] dyingEnemySpriteSheet;
+    public static TextureRegion[] dyingEnemySpriteSheetBis;
 
     public static void loadTexture() {
         loadMap();
@@ -47,17 +49,23 @@ public class TextureLoader {
 
     private static void loadEnemiesTexture(){
         TextureLoader.dyingEnemySpriteSheet = new TextureRegion[6];
+        TextureLoader.dyingEnemySpriteSheetBis = new TextureRegion[6];
         TextureRegion[][] tempFrames = TextureRegion.split(new Texture("Death_monster.png"), 96, 93);
+        TextureRegion[][] tempFramesBis = TextureRegion.split(new Texture("Death_monsterBis.png"), 96, 93);
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 3; j++) {
                 TextureLoader.dyingEnemySpriteSheet[j * 2 + i] = tempFrames[j][i];
+                TextureLoader.dyingEnemySpriteSheetBis[j * 2 + i] = tempFramesBis[j][i];
             }
         }
         TextureLoader.flyingEnemySpriteSheet = new TextureRegion[4];
+        TextureLoader.flyingEnemySpriteSheetBis = new TextureRegion[4];
         tempFrames = TextureRegion.split(new Texture("Movement.png"), 100, 90);
+        tempFramesBis = TextureRegion.split(new Texture("MovementBis.png"), 100, 90);
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 2; j++) {
                 TextureLoader.flyingEnemySpriteSheet[j * 2 + i] = tempFrames[j][i];
+                TextureLoader.flyingEnemySpriteSheetBis[j * 2 + i] = tempFramesBis[j][i];
             }
         }
     }

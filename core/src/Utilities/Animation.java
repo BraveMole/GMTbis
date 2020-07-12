@@ -5,7 +5,9 @@ import panic.game.TextureLoader;
 
 public enum Animation {
     ENEMY_FLYING(1 / 4f, TextureLoader.flyingEnemySpriteSheet, 100* Settings.enemySize, 90* Settings.enemySize),
-    ENEMY_DYING(1/6f,TextureLoader.dyingEnemySpriteSheet,96* Settings.enemySize,93* Settings.enemySize);
+    ENEMY_FLYING_BIS(1 / 4f, TextureLoader.flyingEnemySpriteSheetBis, 100* Settings.enemySize, 90* Settings.enemySize),
+    ENEMY_DYING(1/6f,TextureLoader.dyingEnemySpriteSheet,96* Settings.enemySize,93* Settings.enemySize),
+    ENEMY_DYING_BIS(1/6f,TextureLoader.dyingEnemySpriteSheetBis,96* Settings.enemySize,93* Settings.enemySize);
     ;
 
     private float frameDuration;
@@ -18,6 +20,10 @@ public enum Animation {
         this.keyFrames = keyFrames;
         this.width = width;
         this.height = height;
+    }
+
+    public float getAnimationDuration(){
+        return frameDuration*keyFrames.length;
     }
 
     public float getFrameDuration() {
