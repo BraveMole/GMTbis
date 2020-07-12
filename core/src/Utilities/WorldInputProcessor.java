@@ -49,11 +49,11 @@ public class WorldInputProcessor implements InputProcessor {
             player.walkies = 1;
             return true;
         }
-        if ((keycode == Input.Keys.A) || (keycode == Input.Keys.LEFT)){
+        if ((keycode == Input.Keys.A) || (keycode == Input.Keys.LEFT)|| (keycode==Input.Keys.Q)){
             player.walkies = -1;
             return true;
         }
-        if ((keycode == Input.Keys.W) || (keycode == Input.Keys.UP)){
+        if ((keycode == Input.Keys.W) || (keycode == Input.Keys.UP) || (keycode==Input.Keys.Z)){
             player.uppies = 1;
             return true;
         }
@@ -69,11 +69,11 @@ public class WorldInputProcessor implements InputProcessor {
             player.walkies = 0;
             return true;
         }
-        if ((keycode == Input.Keys.A) || (keycode == Input.Keys.LEFT)){
+        if ((keycode == Input.Keys.A) || (keycode == Input.Keys.LEFT)|| (keycode==Input.Keys.Q) ){
             player.walkies = 0;
             return true;
         }
-        if ((keycode == Input.Keys.W) || (keycode == Input.Keys.UP)){
+        if ((keycode == Input.Keys.W) || (keycode == Input.Keys.UP) || (keycode==Input.Keys.Z)){
             player.uppies = 0;
             return true;
         }

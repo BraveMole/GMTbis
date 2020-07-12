@@ -64,7 +64,7 @@ public class Player extends SuperActor{
             }
         }
 
-        if ((controlsleft.contains("d") && (walkies == 1)) || (controlsleft.contains("a") && (walkies == -1))) {
+        if ((controlsleft.contains("d")&& (walkies == 1)) || (controlsleft.contains("a") && (walkies == -1))) {
             xvel += walkies * speed;
         }
 

@@ -15,9 +15,9 @@ public class HUD  {
     public Viewport viewport;
     public SpriteBatch batch;
     public Array<Key> keys;
-    public int[] x = {100, 150, 50, 100, 250 ,300 ,350};
-    public int[] y = {50, 0, 0, 0,25,25,25};
-    private int size = 150;
+    public int[] x = {50, 100, 0, 50, 175 ,225 ,275};
+    public int[] y = {50, 0 , 0, 0,25,25,25};
+    public int size = 200;
 
     public HUD(){
         viewport = new FitViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight(),new OrthographicCamera());
@@ -25,7 +25,7 @@ public class HUD  {
         this.batch=(SpriteBatch)stage.getBatch();
         keys = new Array<>();
         for (int z = 0; z < GameClass.character.totalcontrols.size(); z++) {
-            Key k = new Key(x[z], y[z], TextureLoader.KEYS[2 * z], TextureLoader.KEYS[2 * z + 1], GameClass.character.totalcontrols.get(z));
+            Key k = new Key(x[z]-size/4, y[z]-size/4, TextureLoader.KEYS[2 * z], TextureLoader.KEYS[2 * z + 1], GameClass.character.totalcontrols.get(z));
             keys.add(k);
             stage.addActor(k);
         }
