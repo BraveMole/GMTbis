@@ -9,6 +9,10 @@ public class Key extends SuperActor {
     Texture t;
     String name;
 
+    public Texture getT() {
+        return t;
+    }
+
     public Key(float x, float y, Texture texton, Texture textoff, String s) {
         this.setX(x);
         this.setY(y);

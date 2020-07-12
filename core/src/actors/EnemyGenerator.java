@@ -1,6 +1,7 @@
 package actors;
 
 import panic.game.GameClass;
+import sun.security.x509.GeneralName;
 
 public class EnemyGenerator {
     float maxenemies = 10;
@@ -25,6 +26,7 @@ public class EnemyGenerator {
             if (GameClass.enemies.size < maxenemies) {
                 framescur = 0;
                 Enemy e = new Enemy((float) (x + Math.random() * xdiff), (float) (y + Math.random() * ydiff));
+                GameClass.enemies.add(e);
                 GameClass.mainWorld.actors.addActor(e);
             }
             else{

@@ -2,9 +2,7 @@ package panic.game;
 
 import actors.Key;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
@@ -18,7 +16,8 @@ public class HUD  {
     public SpriteBatch batch;
     public Array<Key> keys;
     public int[] x = {100, 150, 50, 100, 250 ,300 ,350};
-    public int[] y = {150, 100, 100, 100,125,125,125};
+    public int[] y = {50, 0, 0, 0,25,25,25};
+    private int size = 150;
 
     public HUD(){
         viewport = new FitViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight(),new OrthographicCamera());
@@ -33,9 +32,14 @@ public class HUD  {
     }
 
     public void render(){
+        for (Key key : keys) {
+            key.act(0.1f);
+        }
         batch.setProjectionMatrix(stage.getViewport().getCamera().combined);
         batch.begin();
-        batch.draw(TextureLoader.KEYS[0],50,50,10,100);
+        for (Key key : keys) {
+            batch.draw(key.getT(),key.getX(),key.getY(),size,size);
+        }
         batch.end();
     }
 

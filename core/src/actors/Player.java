@@ -61,7 +61,6 @@ public class Player extends SuperActor{
             int a = collide(this.getX(), this.getY(), this.getWidth(), this.getHeight(), e.getX(), e.getY(), e.getWidth(), e.getHeight());
             if (a == 0){
                 invis = invisframes;
-
             }
         }
 
