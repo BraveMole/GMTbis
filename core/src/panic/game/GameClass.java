@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.Array;
 public class GameClass extends ApplicationAdapter {
     public static World mainWorld;
     public static HUD hud;
+    public static Background background;
     public static Player character;
     public static Array<Projectile> liveProjectiles;
     public static ShapeRenderer debugrender;
@@ -26,8 +27,8 @@ public class GameClass extends ApplicationAdapter {
     public void create() {
         TextureLoader.loadTexture();
         ObstacleBuilder.buildBuildingsBodies(TextureLoader.map, Settings.layerName1);
-//        ObstacleBuilder.buildBuildingsBodies(TextureLoader.map, Settings.layerName2);
         character = new Player(ObstacleBuilder.middleOfMap().x,ObstacleBuilder.middleOfMap().y+100);
+        background = new Background();
         mainWorld = new World();
         hud = new HUD();
         renderer = new OrthogonalTiledMapRenderer(TextureLoader.map);
@@ -48,6 +49,7 @@ public class GameClass extends ApplicationAdapter {
     public void render() {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        background.render();
         renderer.setView((OrthographicCamera)mainWorld.getViewport().getCamera());
         renderer.render();
 

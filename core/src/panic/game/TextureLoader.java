@@ -3,6 +3,7 @@ package panic.game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.TextureData;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 
@@ -13,6 +14,9 @@ public class TextureLoader {
     public static Texture Enemy;
     public static Texture Projectile;
     public static Texture[] KEYS = new Texture[14];
+    public static Texture background;
+    public static TextureRegion[] flyingEnemySpriteSheet;
+    public static TextureRegion[] dyingEnemySpriteSheet;
 
     public static void loadTexture() {
         loadMap();
@@ -37,6 +41,25 @@ public class TextureLoader {
         KEYS[12] = new Texture("K.png");
         KEYS[13] = new Texture("K_no.png");
         Projectile = new Texture("placeHolderProjectile.png");
+        background = new Texture("background.png");
+        loadEnemiesTexture();
+    }
+
+    private static void loadEnemiesTexture(){
+        TextureLoader.dyingEnemySpriteSheet = new TextureRegion[6];
+        TextureRegion[][] tempFrames = TextureRegion.split(new Texture("Death_monster.png"), 96, 93);
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 3; j++) {
+                TextureLoader.dyingEnemySpriteSheet[j * 2 + i] = tempFrames[j][i];
+            }
+        }
+        TextureLoader.flyingEnemySpriteSheet = new TextureRegion[4];
+        tempFrames = TextureRegion.split(new Texture("Movement.png"), 100, 90);
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                TextureLoader.flyingEnemySpriteSheet[j * 2 + i] = tempFrames[j][i];
+            }
+        }
     }
 
     private static void loadMap() {

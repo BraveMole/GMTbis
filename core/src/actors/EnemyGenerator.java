@@ -17,7 +17,7 @@ public class EnemyGenerator {
     float timeSinceLastApparition;
 
     public EnemyGenerator(float x, float y, float xdiff, float ydiff){
-        maxenemies = 10;
+        maxenemies = 1;
         this.x = x;
         this.y = y;
         this.xdiff = xdiff;
@@ -44,10 +44,10 @@ public class EnemyGenerator {
                 }
             }
         }
-        if (timeSinceLastAugmentationOfEnemies>Settings.timeBetweenTwoAugmentation){
+       /* if (timeSinceLastAugmentationOfEnemies>Settings.timeBetweenTwoAugmentation){
             timeSinceLastAugmentationOfEnemies=0;
             maxenemies+=1;
-        }
+        }*/
 
     }
 }
