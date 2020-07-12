@@ -2,6 +2,7 @@ package actors;
 
 import Utilities.AnimatedSprite;
 import Utilities.Settings;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector3;
@@ -25,6 +26,9 @@ public class Player extends SuperActor{
     double xvel = 0f;
     double yvel = 0f;
 
+    float spawnx = 0;
+    float spawny = 0;
+
     public static ArrayList<String> totalcontrols = new ArrayList<String>();
     public static ArrayList<String> controlsleft = new ArrayList<String>();
     public int walkies;
@@ -37,6 +41,9 @@ public class Player extends SuperActor{
     private float height;
 
     public Player(float x, float y){
+        spawnx = x;
+        spawny = y;
+
         totalcontrols.add("w");
         totalcontrols.add("d");
         totalcontrols.add("a");
@@ -73,8 +80,28 @@ public class Player extends SuperActor{
         GameClass.liveProjectiles.add(projectile);
     }
 
+    public void respawn(){
+        controlsleft = (ArrayList<String>) totalcontrols.clone();
+        this.setX(spawnx);
+        this.setY(spawny);
+        while (GameClass.liveProjectiles.size > 0) {
+            Projectile p = GameClass.liveProjectiles.removeIndex(0);
+            GameClass.mainWorld.actors.removeActor(p);
+        }
+        while (GameClass.enemies.size > 0){
+            GameClass.enemies.get(0).die();
+        }
+    }
+
     @Override
     public void act(float delta) {
+        if (this.getY() < 7800){
+            respawn();
+        }
+        if (controlsleft.size() == 0){
+            respawn();
+        }
+
         if (walkies == -1 && right){
             right = false;
         }
@@ -97,7 +124,7 @@ public class Player extends SuperActor{
             }
         }
 
-        if ((controlsleft.contains("d") && (walkies == 1)) || (controlsleft.contains("a") && (walkies == -1))) {
+        if ((controlsleft.contains("d") && (walkies == 1)) || (controlsleft.contains("a") && (walkies == -1)) && !groundpound) {
             xvel += walkies * Settings.playerSpeed;
         }
 
