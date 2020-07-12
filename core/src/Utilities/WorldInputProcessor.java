@@ -45,12 +45,10 @@ public class WorldInputProcessor implements InputProcessor {
     public boolean keyDown(int keycode) {
         if ((keycode == Input.Keys.D) || (keycode == Input.Keys.RIGHT)){
             player.walkies = 1;
-            player.setGoesToTheRight(true);
             return true;
         }
         if ((keycode == Input.Keys.A) || (keycode == Input.Keys.LEFT)|| (keycode==Input.Keys.Q)){
             player.walkies = -1;
-            player.setGoesToTheRight(false);
             return true;
         }
         if ((keycode == Input.Keys.W) || (keycode == Input.Keys.UP) || (keycode==Input.Keys.Z)){
