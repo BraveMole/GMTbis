@@ -20,6 +20,7 @@ public class Player extends SuperActor{
     boolean right = false;
     boolean doublejump = false;
     boolean dash = false;
+    boolean groundpound = false;
     int invis = 0;
     double xvel = 0f;
     double yvel = 0f;
@@ -30,6 +31,7 @@ public class Player extends SuperActor{
     public int uppies;
     public boolean usedoublejump = false;
     public boolean usedash = false;
+    public boolean usegroundpound = false;
     private Rectangle collisionRectangle;
     private float width;
     private float height;
@@ -62,11 +64,11 @@ public class Player extends SuperActor{
     public void fire(Vector3 fireDirection){
         float xdiff = fireDirection.x - this.getX();
         float ydiff = fireDirection.y - this.getY();
-        float angle =(float)Math.atan(ydiff/xdiff);
-        if (xdiff<0){
-            angle+=PI;
+        float angle = (float) Math.atan(ydiff/xdiff);
+        if (xdiff < 0){
+            angle += PI;
         }
-        Projectile projectile = new Projectile(this.getX(),this.getY(),angle);
+        Projectile projectile = new Projectile(this.getX(), this.getY(), angle);
         GameClass.mainWorld.addActor(projectile);
         GameClass.liveProjectiles.add(projectile);
     }
@@ -84,11 +86,15 @@ public class Player extends SuperActor{
             invis--;
         }
         for (Enemy e : GameClass.enemies){
-            if(Intersector.overlaps(e.getCollisionPolygon().getBoundingRectangle(),this.getCollisionRectangle()) && (invis == 0)){
-                invis = invisframes;
-                controlsleft.remove(controlsleft.size() - 1);
+            if (Intersector.overlaps(e.getCollisionPolygon().getBoundingRectangle(),this.getCollisionRectangle()) && (invis == 0)) {
+                if (groundpound){
+                    e.die();
+                }
+                else {
+                    invis = invisframes;
+                    controlsleft.remove(controlsleft.size() - 1);
+                }
             }
-
         }
 
         if ((controlsleft.contains("d") && (walkies == 1)) || (controlsleft.contains("a") && (walkies == -1))) {
@@ -127,6 +133,8 @@ public class Player extends SuperActor{
         collisionRectangle.set(this.getX()-width/2,this.getY()-height/2,width,height);
 
         if (onTheGround()) {
+            groundpound = false;
+            usegroundpound = false;
             if (controlsleft.contains("w")) {
                 yvel += uppies * Settings.jumpheight;
             }
@@ -138,10 +146,23 @@ public class Player extends SuperActor{
                 doublejump = true;
             }
         }
+        else{
+            if (controlsleft.contains("s") && usegroundpound && !groundpound){
+                groundpound = true;
+                usegroundpound = false;
+            }
+        }
 
-        xvel *= 0.5f;
-        yvel -= 1;
-        yvel *= 0.9f;
+        xvel *= Settings.friction;
+
+        if (groundpound) {
+            yvel -= Settings.gravity * Settings.groundpound;
+        }
+        else{
+            yvel -= Settings.gravity;
+        }
+
+        yvel *= Settings.airresistance;
 
 
         if ((onTheGround() || (this.getY() < 0)) && (yvel <= 0)){
