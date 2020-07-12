@@ -10,8 +10,13 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class Player extends SuperActor{
     final static int speed = 20;
+    final static int dashspeed = 500;
     final static int height = 50;
     final static int invisframes = 240;
+    final static int dashinvis = 10;
+
+    boolean right = false;
+    boolean dash = false;
     int invis = 0;
     double xvel = 0f;
     double yvel = 0f;
@@ -20,6 +25,7 @@ public class Player extends SuperActor{
     public static ArrayList<String> controlsleft = new ArrayList<String>();
     public int walkies;
     public int uppies;
+    public boolean usedash = false;
 
     public Player(float x, float y){
         totalcontrols.add("w");
@@ -41,6 +47,13 @@ public class Player extends SuperActor{
 
     @Override
     public void act(float delta) {
+        if (walkies == -1 && right){
+            right = false;
+        }
+        if (walkies == 1 && !right){
+            right = true;
+        }
+
         if (invis != 0){
             invis--;
         }
@@ -55,8 +68,34 @@ public class Player extends SuperActor{
         if ((controlsleft.contains("d") && (walkies == 1)) || (controlsleft.contains("a") && (walkies == -1))) {
             xvel += walkies * speed;
         }
-        if (onTheGround() && controlsleft.contains("w")){
-            yvel += uppies * height;
+
+        if (usedash && dash){
+            if (invis == 0) {
+                System.out.println("Dash used");
+                dash = false;
+                invis = dashinvis;
+                if (right) {
+                    xvel += dashspeed;
+                }
+                else{
+                    xvel -= dashspeed;
+                }
+            }
+        }
+
+        if (invis == 0 && !dash && usedash){
+            System.out.println("Dash stopped");
+            usedash = false;
+        }
+
+        if (onTheGround()) {
+            if (controlsleft.contains("w")) {
+                yvel += uppies * height;
+            }
+            if (controlsleft.contains("h") && !usedash && !dash){
+                System.out.println("Dash restored");
+                dash = true;
+            }
         }
 
         xvel *= 0.5f;
@@ -76,7 +115,6 @@ public class Player extends SuperActor{
 
 
         if (bumping()){
-            System.out.println("bump");
             this.setX(originalX);
             this.setY(originalY);
         }
