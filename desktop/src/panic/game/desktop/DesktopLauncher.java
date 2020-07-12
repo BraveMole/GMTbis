@@ -10,6 +10,7 @@ public class DesktopLauncher {
 		config.samples = 1;
 		config.width = 1600;
 		config.height = 650;
+		config.resizable = false;
 		new LwjglApplication(new GameClass(), config);
 	}
 }
