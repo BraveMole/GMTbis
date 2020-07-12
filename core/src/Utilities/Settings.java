@@ -1,7 +1,8 @@
 package Utilities;
 
 public class Settings {
-    public static String layerName = "Ground";
+    public static String layerName1 = "Ground";
+    public static String layerName2 = "Platform";
     public static float projectileSpeed = 300;
     public static float enemySpeed = 4;
     public static float playerSpeed = 20;

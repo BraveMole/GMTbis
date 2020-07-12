@@ -82,9 +82,9 @@ public class Player extends SuperActor{
             invis--;
         }
         for (Enemy e : GameClass.enemies){
-            if(Intersector.overlaps(e.getCollisionPolygon().getBoundingRectangle(),this.getCollisionRectangle())){
+            if(Intersector.overlaps(e.getCollisionPolygon().getBoundingRectangle(),this.getCollisionRectangle()) && (invis == 0)){
                 invis = invisframes;
-                System.out.println("touche!");
+                controlsleft.remove(controlsleft.size() - 1);
             }
 
         }
@@ -99,7 +99,7 @@ public class Player extends SuperActor{
                 dash = false;
                 invis = dashinvis;
                 if (right) {
-                    xvel +=Settings.dashSpeed;
+                    xvel += Settings.dashSpeed;
                 }
                 else{
                     xvel -= Settings.dashSpeed;
