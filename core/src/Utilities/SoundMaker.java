@@ -32,9 +32,5 @@ public class SoundMaker {
         takedamage = Gdx.audio.newSound(Gdx.files.internal("music/TakeDamage.wav"));
         gain = Gdx.audio.newSound(Gdx.files.internal("music/Gain.wav"));
         full = Gdx.audio.newSound(Gdx.files.internal("music/Full.wav"));
-
-        battle.setVolume(1f);
-        battle.setLooping(true);
-        battle.play();
     }
 }

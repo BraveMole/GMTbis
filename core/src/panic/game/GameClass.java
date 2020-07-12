@@ -40,8 +40,11 @@ public class GameClass extends ApplicationAdapter {
         enemies = new Array<>();
         liveProjectiles = new Array<>();
         sm = new SoundMaker();
+        sm.battle.setLooping(true);
+        sm.battle.play();
+
     }
-    
+
     @Override
     public void render() {
         Gdx.gl.glClearColor(1, 1, 1, 1);
