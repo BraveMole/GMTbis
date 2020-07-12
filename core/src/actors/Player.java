@@ -82,8 +82,10 @@ public class Player extends SuperActor{
             invis--;
         }
         for (Enemy e : GameClass.enemies){
-            //TODO enemycollision
-            invis = invisframes;
+            if(Intersector.overlaps(e.getCollisionPolygon().getBoundingRectangle(),this.getCollisionRectangle())){
+                invis = invisframes;
+                System.out.println("touche!");
+            }
 
         }
 
@@ -135,6 +137,8 @@ public class Player extends SuperActor{
 
         this.setX((float) (this.getX() + xvel));
         this.setY((float) (this.getY() + yvel));
+
+
 
 
         if (bumping()){
