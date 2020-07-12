@@ -14,10 +14,11 @@ import com.badlogic.gdx.math.Rectangle;
 import static java.lang.Math.PI;
 
 public class Player extends SuperActor{
-    final static int invisframes = 240;
-    final static int dashinvis = 10;
+    final static int invisframes = 120;
+    final static int dashinvis = 5;
 
     boolean right = false;
+    boolean doublejump = false;
     boolean dash = false;
     int invis = 0;
     double xvel = 0f;
@@ -27,6 +28,7 @@ public class Player extends SuperActor{
     public static ArrayList<String> controlsleft = new ArrayList<String>();
     public int walkies;
     public int uppies;
+    public boolean usedoublejump = false;
     public boolean usedash = false;
     private Rectangle collisionRectangle;
     private float width;
@@ -89,13 +91,13 @@ public class Player extends SuperActor{
 
         }
 
-        if ((controlsleft.contains("d")&& (walkies == 1)) || (controlsleft.contains("a") && (walkies == -1))) {
+        if ((controlsleft.contains("d") && (walkies == 1)) || (controlsleft.contains("a") && (walkies == -1))) {
             xvel += walkies * Settings.playerSpeed;
         }
 
-        if (usedash && dash){
+        if (controlsleft.contains("j") && usedash && dash){
             if (invis == 0) {
-                System.out.println("Dash used");
+//                System.out.println("Dash used");
                 dash = false;
                 invis = dashinvis;
                 if (right) {
@@ -107,19 +109,33 @@ public class Player extends SuperActor{
             }
         }
 
+        if (controlsleft.contains("h") && usedoublejump && doublejump) {
+            if (invis == 0) {
+                doublejump = false;
+                invis = dashinvis;
+                yvel += Settings.jumpheight;
+            }
+        }
+
         if (invis == 0 && !dash && usedash){
-            System.out.println("Dash stopped");
+//            System.out.println("Dash stopped");
             usedash = false;
+        }
+        if (invis == 0 && !doublejump && usedoublejump){
+            usedoublejump = false;
         }
         collisionRectangle.set(this.getX()-width/2,this.getY()-height/2,width,height);
 
         if (onTheGround()) {
             if (controlsleft.contains("w")) {
-                yvel += uppies * height;
+                yvel += uppies * Settings.jumpheight;
             }
-            if (controlsleft.contains("h") && !usedash && !dash){
-                System.out.println("Dash restored");
+            if (controlsleft.contains("j") && !usedash && !dash){
+//                System.out.println("Dash restored");
                 dash = true;
+            }
+            if (controlsleft.contains("h") && !usedoublejump && !doublejump){
+                doublejump = true;
             }
         }
 
