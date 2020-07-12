@@ -2,6 +2,7 @@ package panic.game;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 
@@ -9,6 +10,7 @@ public class TextureLoader {
     public static AssetManager manager;
     public static TiledMap map;
     public static Texture Player;
+    public static Texture Enemy;
     public static Texture[] KEYS = new Texture[14];
 
     public static void loadTexture() {
@@ -18,6 +20,7 @@ public class TextureLoader {
 
     private static void loadTextureActors(){
         Player = new Texture("Triston.png");
+        Enemy = new Texture("pacfrog2.png");
         KEYS[0] = new Texture("W.png");
         KEYS[1] = new Texture("W_no.png");
         KEYS[2] = new Texture("D.png");
@@ -35,7 +38,7 @@ public class TextureLoader {
     }
 
     private static void loadMap() {
-        String filename ="bigmap.tmx";
+        String filename ="Map1.tmx";
         manager = new AssetManager();
         manager.setLoader(TiledMap.class, new TmxMapLoader());
         manager.load(filename, TiledMap.class);

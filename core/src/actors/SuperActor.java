@@ -20,7 +20,7 @@ public class SuperActor extends Actor {
         }
     }
 
-    private boolean mustBeDrawn() {
+    public boolean mustBeDrawn() {
         return (mainWorld.getCamera().frustum.pointInFrustum(this.getX() - sprite.getWidth() / 2f, this.getY() - sprite.getHeight() / 2f, 0) | mainWorld.getCamera().frustum.pointInFrustum(this.getX() - sprite.getWidth() / 2f, this.getY() + sprite.getHeight() / 2f, 0) |
                 mainWorld.getCamera().frustum.pointInFrustum(this.getX() + sprite.getWidth() / 2f, this.getY() - sprite.getHeight() / 2f, 0) | mainWorld.getCamera().frustum.pointInFrustum(this.getX() + sprite.getHeight() / 2f, this.getY() + sprite.getHeight() / 2f, 0));
     }

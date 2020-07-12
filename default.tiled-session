@@ -1,0 +1,128 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "/Users/justinfu/Desktop/Map1.tmx",
+    "expandedProjectPaths": [
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "/Users/justinfu/Desktop/GMTK/Art/Stands.tsx": {
+            "scaleInDock": 0.4577,
+            "scaleInEditor": 1
+        },
+        "/Users/justinfu/Desktop/GMTK/Art/lamp.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "/Users/justinfu/Desktop/GMTK/Art/platform.tsx": {
+            "scaleInDock": 0.6129,
+            "scaleInEditor": 1
+        },
+        "/Users/justinfu/Desktop/GMTK/Art/trash mossy.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "/Users/justinfu/Desktop/MAPS/Map1.tmx": {
+            "scale": 1.3183,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 17180.83895926572,
+                "y": 15912.918152165668
+            }
+        },
+        "/Users/justinfu/Desktop/MAPS/dne.tsx": {
+            "scaleInDock": 0.1957,
+            "scaleInEditor": 1
+        },
+        "/Users/justinfu/Desktop/MAPS/end.tsx": {
+            "scaleInDock": 0.25,
+            "scaleInEditor": 1
+        },
+        "/Users/justinfu/Desktop/MAPS/fungi.tsx": {
+            "scaleInDock": 0.4842,
+            "scaleInEditor": 1
+        },
+        "/Users/justinfu/Desktop/MAPS/fungi1.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "/Users/justinfu/Desktop/MAPS/fungi2.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "/Users/justinfu/Desktop/MAPS/fungi3.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "/Users/justinfu/Desktop/MAPS/fungi5.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "/Users/justinfu/Desktop/MAPS/grass.tsx": {
+            "scaleInDock": 0.25
+        },
+        "/Users/justinfu/Desktop/MAPS/land.tsx": {
+            "scaleInDock": 0.5249,
+            "scaleInEditor": 1
+        },
+        "/Users/justinfu/Desktop/Map1.tmx": {
+            "scale": 0.1365,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 7648.351648351649,
+                "y": 6201.465201465202
+            }
+        },
+        "/Users/justinfu/Desktop/grass.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "/Users/justinfu/Desktop/map1.tmx": {
+            "scale": 0.5836,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 15895.305003427005,
+                "y": 16237.148732008225
+            }
+        },
+        "/Users/justinfu/Desktop/trash.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "map.height": 500,
+    "map.lastUsedFormat": "tmx",
+    "map.layerDataFormat": null,
+    "map.width": 500,
+    "openFiles": [
+        "/Users/justinfu/Desktop/Map1.tmx",
+        "/Users/justinfu/Desktop/MAPS/land.tsx",
+        "/Users/justinfu/Desktop/MAPS/fungi1.tsx",
+        "/Users/justinfu/Desktop/MAPS/fungi2.tsx",
+        "/Users/justinfu/Desktop/MAPS/fungi3.tsx",
+        "/Users/justinfu/Desktop/MAPS/fungi5.tsx",
+        "/Users/justinfu/Desktop/GMTK/Art/platform.tsx",
+        "/Users/justinfu/Desktop/GMTK/Art/Stands.tsx",
+        "/Users/justinfu/Desktop/GMTK/Art/lamp.tsx",
+        "/Users/justinfu/Desktop/GMTK/Art/trash mossy.tsx",
+        "/Users/justinfu/Desktop/trash.tsx"
+    ],
+    "project": "",
+    "recentFiles": [
+        "/Users/justinfu/Desktop/trash.tsx",
+        "/Users/justinfu/Desktop/GMTK/Art/trash mossy.tsx",
+        "/Users/justinfu/Desktop/GMTK/Art/lamp.tsx",
+        "/Users/justinfu/Desktop/GMTK/Art/Stands.tsx",
+        "/Users/justinfu/Desktop/GMTK/Art/platform.tsx",
+        "/Users/justinfu/Desktop/MAPS/fungi5.tsx",
+        "/Users/justinfu/Desktop/MAPS/fungi3.tsx",
+        "/Users/justinfu/Desktop/MAPS/fungi2.tsx",
+        "/Users/justinfu/Desktop/MAPS/fungi1.tsx",
+        "/Users/justinfu/Desktop/MAPS/land.tsx",
+        "/Users/justinfu/Desktop/Map1.tmx",
+        "/Users/justinfu/Desktop/MAPS/fungi.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx"
+}
