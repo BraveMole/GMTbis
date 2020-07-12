@@ -40,7 +40,7 @@ public class Enemy extends SuperActor {
         Polygon placeHodler = new Polygon();
         for (Projectile liveProjectile : GameClass.liveProjectiles) {
             if(Intersector.overlapConvexPolygons(liveProjectile.getCollisionPolygon(), this.getCollisionPolygon())) {
-                this.die();
+                this.die(true);
             }
         }
         if (!this.sprite.isFlipX() && !goesToRight){
@@ -53,7 +53,11 @@ public class Enemy extends SuperActor {
         super.act(delta);
     }
 
-    public void die(){
+    public void die(boolean killed){
+        if (killed) {
+            GameClass.sm.enemykilled.play();
+        }
+
         GameClass.enemies.removeValue(this,false);
         GameClass.mainWorld.actors.removeActor(this);
     }

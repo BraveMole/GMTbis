@@ -1,6 +1,7 @@
 package panic.game;
 
 import Utilities.Settings;
+import Utilities.SoundMaker;
 import actors.Enemy;
 import actors.Projectile;
 import com.badlogic.gdx.ApplicationAdapter;
@@ -21,6 +22,7 @@ public class GameClass extends ApplicationAdapter {
     public static ShapeRenderer debugrender;
     public static Array<Enemy> enemies;
     public static boolean debug = true;
+    public static SoundMaker sm;
     private OrthogonalTiledMapRenderer renderer;
 
     @Override
@@ -36,6 +38,7 @@ public class GameClass extends ApplicationAdapter {
         debugrender = new ShapeRenderer();
         enemies = new Array<>();
         liveProjectiles = new Array<>();
+        sm = new SoundMaker();
     }
 
     public void addLiveProjectile(Projectile projectile){

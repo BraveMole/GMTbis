@@ -69,6 +69,7 @@ public class Player extends SuperActor{
     }
 
     public void fire(Vector3 fireDirection){
+        GameClass.sm.shoot.play();
         float xdiff = fireDirection.x - this.getX();
         float ydiff = fireDirection.y - this.getY();
         float angle = (float) Math.atan(ydiff/xdiff);
@@ -81,6 +82,7 @@ public class Player extends SuperActor{
     }
 
     public void respawn(){
+        GameClass.sm.lose.play();
         controlsleft = (ArrayList<String>) totalcontrols.clone();
         this.setX(spawnx);
         this.setY(spawny);
@@ -89,7 +91,7 @@ public class Player extends SuperActor{
             GameClass.mainWorld.actors.removeActor(p);
         }
         while (GameClass.enemies.size > 0){
-            GameClass.enemies.get(0).die();
+            GameClass.enemies.get(0).die(false);
         }
     }
 
@@ -115,9 +117,10 @@ public class Player extends SuperActor{
         for (Enemy e : GameClass.enemies){
             if (Intersector.overlaps(e.getCollisionPolygon().getBoundingRectangle(),this.getCollisionRectangle()) && (invis == 0)) {
                 if (groundpound){
-                    e.die();
+                    e.die(true);
                 }
                 else {
+                    GameClass.sm.takedamage.play();
                     invis = invisframes;
                     controlsleft.remove(controlsleft.size() - 1);
                 }
@@ -130,6 +133,7 @@ public class Player extends SuperActor{
 
         if (controlsleft.contains("j") && usedash && dash){
             if (invis == 0) {
+                GameClass.sm.dash.play();
 //                System.out.println("Dash used");
                 dash = false;
                 invis = dashinvis;
@@ -144,6 +148,7 @@ public class Player extends SuperActor{
 
         if (controlsleft.contains("h") && usedoublejump && doublejump) {
             if (invis == 0) {
+                GameClass.sm.doublejump.play();
                 doublejump = false;
                 invis = dashinvis;
                 yvel += Settings.jumpheight;
@@ -163,6 +168,9 @@ public class Player extends SuperActor{
             groundpound = false;
             usegroundpound = false;
             if (controlsleft.contains("w")) {
+                if (uppies != 0){
+                    GameClass.sm.jump.play();
+                }
                 yvel += uppies * Settings.jumpheight;
             }
             if (controlsleft.contains("j") && !usedash && !dash){
