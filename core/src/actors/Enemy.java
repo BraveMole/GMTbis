@@ -38,7 +38,6 @@ public class Enemy extends SuperActor {
         this.setX(this.getX() + (xdiff * Settings.enemySpeed / hypotenuse));
         this.setY(this.getY() + (ydiff * Settings.enemySpeed / hypotenuse));
         collisionPolygon.setPosition(this.getX()-width/2,this.getY()-height/2);
-        Polygon placeHodler=new Polygon();
         for (Projectile liveProjectile : GameClass.liveProjectiles) {
             if(Intersector.overlapConvexPolygons(liveProjectile.getCollisionPolygon(), this.getCollisionPolygon()))
             {
