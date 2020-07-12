@@ -63,10 +63,10 @@ public class GameClass extends ApplicationAdapter {
             }
             debugrender.rect(character.getCollisionRectangle().x,character.getCollisionRectangle().y,character.getCollisionRectangle().width,character.getCollisionRectangle().height);
             for (Enemy enemy : enemies) {
-                debugrender.rect(enemy.getCollisionRectangle().x,enemy.getCollisionRectangle().y,enemy.getCollisionRectangle().width,enemy.getCollisionRectangle().height);
+                debugrender.polygon(enemy.getCollisionPolygon().getTransformedVertices());
             }
             for (Projectile liveProjectile : liveProjectiles) {
-                debugrender.polygon(liveProjectile.getCollisionPolygon().getVertices());
+                debugrender.polygon(liveProjectile.getCollisionPolygon().getTransformedVertices());
             }
             debugrender.end();
         }

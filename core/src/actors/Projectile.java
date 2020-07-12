@@ -21,7 +21,8 @@ public class Projectile extends SuperActor {
         this.sprite = new AnimatedSprite(text, x, y, 0, width, height);
         collisionPolygon = new Polygon(new float[]{0,0,width,0,width,height,0,height});
         collisionPolygon.setOrigin(width/2,height/2);
-        collisionPolygon.setPosition(x,y);
+        collisionPolygon.rotate((float)Math.toDegrees(directionAngle));
+
     }
 
     public Polygon getCollisionPolygon() {
@@ -33,6 +34,6 @@ public class Projectile extends SuperActor {
         super.act(delta);
         this.setX((float)(this.getX()+delta* Settings.projectileSpeed*Math.cos(directionAngle)));
         this.setY((float)(this.getY()+delta* Settings.projectileSpeed*Math.sin(directionAngle)));
-        collisionPolygon.setPosition(this.getX(),this.getY());
+        collisionPolygon.setPosition(this.getX()-width/2,this.getY()-height/2);
     }
 }

@@ -66,6 +66,7 @@ public class Player extends SuperActor{
         }
         Projectile projectile = new Projectile(this.getX(),this.getY(),angle);
         GameClass.mainWorld.addActor(projectile);
+        GameClass.liveProjectiles.add(projectile);
     }
 
     @Override

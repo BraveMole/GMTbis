@@ -3,12 +3,14 @@ package actors;
 import Utilities.AnimatedSprite;
 import Utilities.Settings;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import panic.game.GameClass;
 import panic.game.TextureLoader;
 
 public class Enemy extends SuperActor {
-    private Rectangle collisionRectangle;
+    private Polygon collisionPolygon;
     private float width;
     private float height;
     public Enemy(float x, float y) {
@@ -19,11 +21,11 @@ public class Enemy extends SuperActor {
         this.setX(x);
         this.setY(y);
         this.setRotation(90);
-        collisionRectangle = new Rectangle(x-width/2,y-height/2,width,height);
+        collisionPolygon = new Polygon(new float[]{0,0,width,0,width,height,0,height});
     }
 
-    public Rectangle getCollisionRectangle() {
-        return collisionRectangle;
+    public Polygon getCollisionPolygon() {
+        return collisionPolygon;
     }
 
     @Override
@@ -35,7 +37,15 @@ public class Enemy extends SuperActor {
 
         this.setX(this.getX() + (xdiff * Settings.enemySpeed / hypotenuse));
         this.setY(this.getY() + (ydiff * Settings.enemySpeed / hypotenuse));
-        collisionRectangle.set(this.getX()-width/2,this.getY()-height/2,width,height);
+        collisionPolygon.setPosition(this.getX()-width/2,this.getY()-height/2);
+        Polygon placeHodler=new Polygon();
+        for (Projectile liveProjectile : GameClass.liveProjectiles) {
+            if(Intersector.overlapConvexPolygons(liveProjectile.getCollisionPolygon(), this.getCollisionPolygon()))
+            {
+                GameClass.enemies.removeValue(this,false);
+                GameClass.mainWorld.actors.removeActor(this);
+            }
+        }
         super.act(delta);
     }
 }
