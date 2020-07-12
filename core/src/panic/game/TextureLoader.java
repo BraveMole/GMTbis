@@ -19,6 +19,12 @@ public class TextureLoader {
     public static TextureRegion[] flyingEnemySpriteSheetBis;
     public static TextureRegion[] dyingEnemySpriteSheet;
     public static TextureRegion[] dyingEnemySpriteSheetBis;
+    public static TextureRegion[] characterStoping;
+    public static TextureRegion[] characterStopingBis;
+    public static TextureRegion[] characterRunning;
+    public static TextureRegion[] characterRunningBis;
+    public static TextureRegion[] characterStopped;
+    public static TextureRegion[] characterStoppedBis;
 
     public static void loadTexture() {
         loadMap();
@@ -45,6 +51,30 @@ public class TextureLoader {
         Projectile = new Texture("placeHolderProjectile.png");
         background = new Texture("background.png");
         loadEnemiesTexture();
+        loadCharacterTexture();
+    }
+
+    private static void loadCharacterTexture(){
+        TextureLoader.characterStoping = new TextureRegion[3];
+        TextureLoader.characterStopingBis = new TextureRegion[3];
+        TextureLoader.characterStopped = new TextureRegion[1];
+        TextureLoader.characterStoppedBis = new TextureRegion[1];
+        TextureRegion[][] tempFrames = TextureRegion.split(new Texture("StillCharacter.png"), 128, 83);
+        TextureRegion[][] tempFramesBis = TextureRegion.split(new Texture("StillCharacterBis.png"), 128, 83);
+        for (int i = 0; i < 3; i++) {
+            characterStoping[i] = tempFrames[i][0];
+            characterStopingBis[i] = tempFramesBis[i][0];
+        }
+        characterStopped[0] = tempFrames [2][0];
+        characterStoppedBis[0] = tempFramesBis [2][0];
+        TextureLoader.characterRunning = new TextureRegion[2];
+        TextureLoader.characterRunningBis = new TextureRegion[2];
+        tempFrames = TextureRegion.split(new Texture("run.png"),150,80);
+        tempFramesBis = TextureRegion.split(new Texture("runBis.png"),150,80);
+        for (int i = 0; i < 2; i++) {
+            characterRunning[i] = tempFrames[i][0];
+            characterRunningBis[i] = tempFramesBis[i][0];
+        }
     }
 
     private static void loadEnemiesTexture(){
