@@ -61,6 +61,13 @@ public class GameClass extends ApplicationAdapter {
             for (int i = 0; i < ObstacleBuilder.Bounds.size; i++) {
                 debugrender.rect(ObstacleBuilder.Bounds.get(i).x, ObstacleBuilder.Bounds.get(i).y, ObstacleBuilder.Bounds.get(i).width, ObstacleBuilder.Bounds.get(i).height);
             }
+            debugrender.rect(character.getCollisionRectangle().x,character.getCollisionRectangle().y,character.getCollisionRectangle().width,character.getCollisionRectangle().height);
+            for (Enemy enemy : enemies) {
+                debugrender.rect(enemy.getCollisionRectangle().x,enemy.getCollisionRectangle().y,enemy.getCollisionRectangle().width,enemy.getCollisionRectangle().height);
+            }
+            for (Projectile liveProjectile : liveProjectiles) {
+                debugrender.polygon(liveProjectile.getCollisionPolygon().getVertices());
+            }
             debugrender.end();
         }
         hud.render();

@@ -3,6 +3,7 @@ package actors;
 import Utilities.AnimatedSprite;
 import Utilities.Settings;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector3;
 import panic.game.GameClass;
 import panic.game.ObstacleBuilder;
@@ -13,7 +14,6 @@ import com.badlogic.gdx.math.Rectangle;
 import static java.lang.Math.PI;
 
 public class Player extends SuperActor{
-    final static int height = 50;
     final static int invisframes = 240;
     final static int dashinvis = 10;
 
@@ -28,6 +28,9 @@ public class Player extends SuperActor{
     public int walkies;
     public int uppies;
     public boolean usedash = false;
+    private Rectangle collisionRectangle;
+    private float width;
+    private float height;
 
     public Player(float x, float y){
         totalcontrols.add("w");
@@ -41,10 +44,17 @@ public class Player extends SuperActor{
         controlsleft = (ArrayList<String>) totalcontrols.clone();
 
         Texture text = TextureLoader.Player;
-        this.sprite = new AnimatedSprite(text, x, y, -90, text.getWidth(), text.getHeight());
+        width = text.getWidth() * Settings.playerSize;
+        height = text.getHeight()*Settings.playerSize;
+        this.sprite = new AnimatedSprite(text, x, y, -90, width, height);
         this.setX(x);
         this.setY(y);
+        collisionRectangle = new Rectangle(x-width/2,y-height/2,width,height);
         this.setRotation(90);
+    }
+
+    public Rectangle getCollisionRectangle() {
+        return collisionRectangle;
     }
 
     public void fire(Vector3 fireDirection){
@@ -71,10 +81,9 @@ public class Player extends SuperActor{
             invis--;
         }
         for (Enemy e : GameClass.enemies){
-            int a = collide(this.getX(), this.getY(), this.getWidth(), this.getHeight(), e.getX(), e.getY(), e.getWidth(), e.getHeight());
-            if (a == 0){
-                invis = invisframes;
-            }
+            //TODO enemycollision
+            invis = invisframes;
+
         }
 
         if ((controlsleft.contains("d")&& (walkies == 1)) || (controlsleft.contains("a") && (walkies == -1))) {
@@ -99,6 +108,7 @@ public class Player extends SuperActor{
             System.out.println("Dash stopped");
             usedash = false;
         }
+        collisionRectangle.set(this.getX()-width/2,this.getY()-height/2,width,height);
 
         if (onTheGround()) {
             if (controlsleft.contains("w")) {
@@ -134,37 +144,13 @@ public class Player extends SuperActor{
         super.act(delta);
     }
 
-    public static int collide(float x1, float y1, float width1, float height1, float x2, float y2, float width2, float height2) {
-/*
-        if (x1 < x2 + width2 && x1 + width1 > x2 && y1 < y2 + height2 && y1 + height1 > y2) {
-            return true;
-        }
-        return false;
-
- */
-        if (x1 > x2 + width2){
-            return 1;
-        }
-        if (x1 + width1 < x2){
-            return 2;
-        }
-        if (y1 > y2 + height2){
-            return 3;
-        }
-        if (y1 + height1 < y2){
-            return 4;
-        }
-        return 0;
-    }
-
     public boolean onTheGround(){
+        Rectangle placeHolder = new Rectangle();
         if (this.getY() < 0){
             return true;
         }
-
         for (Rectangle r : ObstacleBuilder.Bounds){
-            int a = collide(this.getX(), this.getY(), this.getWidth(), this.getHeight(), r.getX(), r.getY(), r.getWidth(), r.getHeight());
-            if ((a == 0) && (this.getY() + r.height > r.getY())){
+            if (Intersector.intersectRectangles(r,this.collisionRectangle,placeHolder)){
                 return true;
             }
         }
@@ -172,9 +158,10 @@ public class Player extends SuperActor{
     }
 
     public boolean bumping(){
+        Rectangle placeHolder = new Rectangle();
         for (Rectangle r : ObstacleBuilder.Bounds){
-            int a = collide(this.getX(), this.getY(), this.getWidth(), this.getHeight(), r.getX(), r.getY(), r.getWidth(), r.getHeight());
-            if ((a == 0) && (this.getY() < r.getY() + r.getHeight() - 10)){
+            Intersector.intersectRectangles(r,this.collisionRectangle,placeHolder);
+            if (placeHolder.height>=10){
                 return true;
             }
         }
