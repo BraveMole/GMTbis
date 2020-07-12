@@ -16,8 +16,8 @@ public class Projectile extends SuperActor {
         Texture text = TextureLoader.Projectile;
         this.directionAngle = directionAngle;
         this.setRotation((float)Math.toDegrees(directionAngle)+90);
-        width = text.getWidth() * Settings.enemySize;
-        height = text.getHeight()*Settings.enemySize;
+        width = text.getWidth() * Settings.projectileSize;
+        height = text.getHeight()*Settings.projectileSize;
         this.sprite = new AnimatedSprite(text, x, y, 0, width, height);
         collisionPolygon = new Polygon(new float[]{0,0,width,0,width,height,0,height});
         collisionPolygon.setOrigin(width/2,height/2);
