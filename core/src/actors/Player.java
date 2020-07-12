@@ -178,33 +178,102 @@ public class Player extends SuperActor{
 
 
 
-        if (bumping()){
-            this.setX(originalX);
-            this.setY(originalY);
+        if (bumpingDown()){
+            this.setY(originalY+5);
+            if (yvel<=0){
+                yvel =-yvel*0.3f;
+            }
+            else{
+                yvel+=1;
+            };
         }
+        if(bumpingUp()){
+            this.setY(originalY-5);
+            if (yvel>=0){
+                yvel =-yvel*0.3f;
+            }
+            else{
+                yvel-=1;
+            }
+        }
+
+        if(bumpingLeft()){
+            this.setX(originalX+5);
+            if (xvel<=0){
+                xvel =-xvel*0.3f;
+            }
+            else{
+                xvel+=1;
+            }
+        }
+        else if(bumpingRight()){
+            this.setX(originalX-5);
+            if (xvel>=0){
+                xvel =-xvel*0.3f;
+            }
+            else{
+                xvel-=1;
+            }
+        }
+
 
         super.act(delta);
     }
 
     public boolean onTheGround(){
         Rectangle placeHolder = new Rectangle();
-        if (this.getY() < 0){
-            return true;
-        }
         for (Rectangle r : ObstacleBuilder.Bounds){
             if (Intersector.intersectRectangles(r,this.collisionRectangle,placeHolder)){
-                return true;
+                if (placeHolder.getY()<this.getY()){
+                    return true;
+                }
             }
         }
         return false;
     }
 
-    public boolean bumping(){
+    public boolean bumpingDown(){
         Rectangle placeHolder = new Rectangle();
         for (Rectangle r : ObstacleBuilder.Bounds){
-            Intersector.intersectRectangles(r,this.collisionRectangle,placeHolder);
-            if (placeHolder.height>=10){
-                return true;
+            if (Intersector.intersectRectangles(r,this.collisionRectangle,placeHolder)){
+                if (placeHolder.getY()<this.getY() & placeHolder.getHeight()>5){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean bumpingUp(){
+        Rectangle placeHolder = new Rectangle();
+        for (Rectangle r : ObstacleBuilder.Bounds){
+            if (Intersector.intersectRectangles(r,this.collisionRectangle,placeHolder)){
+                if (placeHolder.getY()>this.getY() & placeHolder.getHeight()>5){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean bumpingLeft(){
+        Rectangle placeHolder = new Rectangle();
+        for (Rectangle r : ObstacleBuilder.Bounds){
+            if (Intersector.intersectRectangles(r,this.collisionRectangle,placeHolder)){
+                if (placeHolder.getX()<this.getX() & placeHolder.getWidth()>5 & placeHolder.getHeight()>10){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public boolean bumpingRight(){
+        Rectangle placeHolder = new Rectangle();
+        for (Rectangle r : ObstacleBuilder.Bounds){
+            if (Intersector.intersectRectangles(r,this.collisionRectangle,placeHolder)){
+                if (placeHolder.getX()>this.getX() & placeHolder.getWidth()>5  & placeHolder.getHeight()>10){
+                    return true;
+                }
             }
         }
         return false;
