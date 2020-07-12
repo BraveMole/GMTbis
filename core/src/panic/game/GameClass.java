@@ -1,7 +1,6 @@
 package panic.game;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import Utilities.Settings;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -9,11 +8,14 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import actors.Player;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import actors.Enemy;
+import com.badlogic.gdx.utils.Array;
 
 public class GameClass extends ApplicationAdapter {
     SpriteBatch batch;
+    public static Array<Enemy> enemies = new Array<Enemy>();
     public static ShapeRenderer debugrender;
-    public static boolean debug = true;
+    public static boolean debug = false;
     public static World mainWorld;
     public static World secondWorld;
     public static Player character;

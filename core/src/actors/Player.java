@@ -2,14 +2,17 @@ package actors;
 
 import Utilities.AnimatedSprite;
 import com.badlogic.gdx.graphics.Texture;
+import panic.game.GameClass;
 import panic.game.ObstacleBuilder;
 import panic.game.TextureLoader;
 import java.util.ArrayList;
 import com.badlogic.gdx.math.Rectangle;
 
 public class Player extends SuperActor{
-    static int speed = 20;
-    static int height = 50;
+    final static int speed = 20;
+    final static int height = 50;
+    final static int invisframes = 240;
+    int invis = 0;
     double xvel = 0f;
     double yvel = 0f;
 
@@ -38,6 +41,17 @@ public class Player extends SuperActor{
 
     @Override
     public void act(float delta) {
+        if (invis != 0){
+            invis--;
+        }
+        for (Enemy e : GameClass.enemies){
+            int a = collide(this.getX(), this.getY(), this.getWidth(), this.getHeight(), e.getX(), e.getY(), e.getWidth(), e.getHeight());
+            if (a == 0){
+                invis = invisframes;
+
+            }
+        }
+
         if ((controlsleft.contains("d") && (walkies == 1)) || (controlsleft.contains("a") && (walkies == -1))) {
             xvel += walkies * speed;
         }

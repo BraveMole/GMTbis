@@ -6,7 +6,7 @@ import panic.game.GameClass;
 import panic.game.TextureLoader;
 
 public class Enemy extends SuperActor {
-    public static int speed = 10;
+    public static int speed = 5;
     public Enemy(float x, float y) {
         Texture text = TextureLoader.Enemy;
         this.sprite = new AnimatedSprite(text, x, y, -90, text.getWidth(), text.getHeight());

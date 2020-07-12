@@ -2,16 +2,19 @@ package panic.game;
 
 import Utilities.WorldInputProcessor;
 import actors.Enemy;
+import actors.EnemyGenerator;
 import actors.Key;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.utils.Array;
 import actors.Player;
 
+import java.util.EmptyStackException;
+
 public class World extends Stage {
     public Array<Key> keys;
     public Group actors = new Group();
-    public Enemy e = new Enemy(700, 700);
+    public EnemyGenerator eg = new EnemyGenerator(7000, 8000, 6000, 1000, 100);
     public WorldInputProcessor inputProcessor;
     public Player p;
 
@@ -25,7 +28,6 @@ public class World extends Stage {
         if (main){
             actors.addActor(p);
             inputProcessor = new WorldInputProcessor(this.getViewport(), this, p);
-            actors.addActor(e);
         }
         else {
             keys = new Array<>();
@@ -45,6 +47,7 @@ public class World extends Stage {
         super.act();
         if (main) {
             inputProcessor.act();
+            eg.act();
             float y = p.getY();
             if (y < 8200){
                 y = 8200;

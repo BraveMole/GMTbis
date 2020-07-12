@@ -2,7 +2,7 @@ package actors;
 
 import Utilities.AnimatedSprite;
 import com.badlogic.gdx.graphics.Texture;
-import panic.game.TextureLoader;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class Key extends SuperActor {
     Texture[] textures = new Texture[2];
@@ -16,9 +16,14 @@ public class Key extends SuperActor {
         textures[1] = textoff;
 
         t = texton;
-        this.sprite = new AnimatedSprite(t, x, y, 0, t.getWidth()/3, t.getHeight()/3);
+        this.sprite = new AnimatedSprite(t, x, y, 0, t.getWidth() / 3, t.getHeight() / 3);
         this.setRotation(90);
         name = s;
+    }
+
+    @Override
+    public boolean mustBeDrawn() {
+        return true;
     }
 
     @Override
