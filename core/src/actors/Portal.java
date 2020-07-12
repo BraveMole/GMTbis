@@ -32,7 +32,7 @@ public class Portal extends SuperActor {
         Player p = GameClass.character;
         if (Intersector.overlaps(this.collisionRectangle, p.getCollisionRectangle())) {
             if (p.isOpen()){
-                p.respawn();
+                GameClass.endGame=true;
             }
         }
 

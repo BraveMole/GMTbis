@@ -26,6 +26,7 @@ public class GameClass extends ApplicationAdapter {
     public static SoundMaker sm;
     private OrthogonalTiledMapRenderer renderer;
     public static boolean menuPassed;
+    public static boolean endGame=false;
     private Menu menu;
 
     @Override
@@ -49,7 +50,7 @@ public class GameClass extends ApplicationAdapter {
     public void render() {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        if (menuPassed) {
+        if (menuPassed && !endGame) {
             background.render();
             renderer.setView((OrthographicCamera) mainWorld.getViewport().getCamera());
             renderer.render();
