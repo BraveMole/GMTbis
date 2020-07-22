@@ -24,12 +24,15 @@ public class Player extends SuperActor{
     int invis = 0;
     double xvel = 0f;
     double yvel = 0f;
+    int downframes;
 
     float spawnx = 0;
     float spawny = 0;
 
     public static ArrayList<String> totalcontrols = new ArrayList<String>();
     public static ArrayList<String> controlsleft = new ArrayList<String>();
+    public int prevwalkies;
+    public int prevuppies;
     public int walkies;
     public int uppies;
     public boolean usedoublejump = false;
@@ -64,6 +67,7 @@ public class Player extends SuperActor{
         this.setRotation(90);
     }
     private void resetControls(){
+        controlsleft = new ArrayList<String>();
         controlsleft.add("w");
         controlsleft.add("d");
         controlsleft.add("a");
@@ -75,7 +79,7 @@ public class Player extends SuperActor{
     }
 
     public void fire(Vector3 fireDirection){
-        if (GameClass.liveProjectiles.size <Settings.maxProjectiles) {
+        if (GameClass.liveProjectiles.size < Settings.maxProjectiles) {
             GameClass.sm.shoot.play();
             float xdiff = fireDirection.x - this.getX();
             float ydiff = fireDirection.y - this.getY();
@@ -90,7 +94,13 @@ public class Player extends SuperActor{
     }
 
     public boolean isOpen(){
-        return controlsleft.contains("k");
+        boolean oldopen = open;
+
+        if (open){
+            open = false;
+        }
+
+        return controlsleft.contains("k") && oldopen;
     }
 
     public void  killedEnemy(){
@@ -128,6 +138,27 @@ public class Player extends SuperActor{
 
     @Override
     public void act(float delta) {
+        if (prevwalkies != walkies){
+            if (walkies == 0){
+                downframes = 0;
+            }
+            else{
+                if (downframes < Settings.downtime && controlsleft.contains("j")){
+                    usedash = true;
+                }
+            }
+        }
+
+        if (prevuppies < uppies) {
+            if (!onTheGround() && controlsleft.contains("h")){
+                usedoublejump = true;
+            }
+        }
+
+        if (walkies == 0){
+            downframes++;
+        }
+
         if (open && !controlsleft.contains("k")){
             open = false;
         }
@@ -150,11 +181,11 @@ public class Player extends SuperActor{
             invis--;
         }
         for (Enemy e : GameClass.enemies){
-            if (Intersector.overlaps(e.getCollisionPolygon().getBoundingRectangle(),this.getCollisionRectangle()) && (invis == 0)) {
+            if (Intersector.overlaps(e.getCollisionPolygon().getBoundingRectangle(),this.getCollisionRectangle())) {
                 if (groundpound){
                     e.die();
                 }
-                else {
+                else if (invis == 0) {
                     GameClass.sm.takedamage.play();
                     invis = invisframes;
                     GameClass.mainWorld.actors.removeActor(e);
@@ -326,6 +357,9 @@ public class Player extends SuperActor{
                 this.setSprite(Animation.CHARACTER_RUNNING);
             }
         }
+
+        prevwalkies = walkies;
+        prevuppies = uppies;
     }
 
     public boolean onTheGround(){

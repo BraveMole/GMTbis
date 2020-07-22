@@ -21,4 +21,5 @@ public class Settings {
     public static float maxProjectiles = 5;
     public static int maxEnemies = 10;
     public static int numberOfEnemiesToKill = 10;
+    public static int downtime = 10;
 }
