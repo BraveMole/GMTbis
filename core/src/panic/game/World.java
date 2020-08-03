@@ -20,17 +20,18 @@ public class World extends Stage {
 
     public World() {
         p = GameClass.character;
-        portal = new Portal(8000, 8500);
+        portal = new Portal((float) (7000 + Math.random() * 6000), (float) (8000 + Math.random() * 1000));
         actors.addActor(p);
         actors.addActor(portal);
         inputProcessor = new WorldInputProcessor(this.getViewport(), this, p);
         super.addActor(actors);
-        this.getViewport().getCamera().viewportHeight = this.getViewport().getScreenHeight();
-        this.getViewport().getCamera().viewportWidth = this.getViewport().getScreenWidth();
     }
 
     @Override
     public void act() {
+        this.getViewport().getCamera().viewportHeight = this.getViewport().getScreenHeight();
+        this.getViewport().getCamera().viewportWidth = this.getViewport().getScreenWidth();
+
         super.act();
         inputProcessor.act();
         eg.act();

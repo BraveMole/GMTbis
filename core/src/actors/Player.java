@@ -138,6 +138,9 @@ public class Player extends SuperActor{
 
     @Override
     public void act(float delta) {
+//        System.out.println("x: " + this.getX());
+//        System.out.println("y: " + this.getY());
+
         if (prevwalkies != walkies){
             if (walkies == 0){
                 downframes = 0;
