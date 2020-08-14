@@ -48,7 +48,6 @@ public class GameClass extends ApplicationAdapter {
         sm.battle.play();
 
     }
-
     @Override
     public void render() {
         Gdx.gl.glClearColor(1, 1, 1, 1);
